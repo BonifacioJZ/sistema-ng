@@ -16,7 +16,7 @@ class LoginView extends Component {
          <Content style={{ padding: '0 50px' }} >
          <br></br><br></br>
          <Row type="flex" justify="center">
-          <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
+          <div style={{ background: '#fff', padding: 24, minHeight: 280, }}>
            
               <Col>
                 <Card>

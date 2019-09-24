@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { Layout, Menu,  Icon } from 'antd';
+import { Layout, Menu,  Icon,Row } from 'antd';
 import Head from './../components/Head';
 import Switc from './../components/Switc';
 const { Header, Content, Footer,Sider } = Layout;
@@ -47,8 +47,8 @@ class Home extends Component {
               </Menu.Item>
             </Menu>
          </Sider>
-          <Layout className="layout">
-            <Header style={{ background: '#fff', padding: 0 }}>
+          <Layout className="layout" >
+            <Header  id="head" style={{ background: '#fff', padding: 0 }}>
               <Head name="Sistema NG"  />
             </Header>
             <Content style={{ margin: '24px 16px 0' }} >

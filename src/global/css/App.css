@@ -45,3 +45,9 @@
 .login-form-button {
   width: 100%;
 }
+
+@media screen and  (max-width:577px) {
+  #head{
+    height: 100px;
+  }
+}
