@@ -4,12 +4,11 @@ import {PageHeader , Button} from 'antd';
 export default function Head(props){
     return(
         <PageHeader  
+        className="header"
         title={props.name} 
-        subTitle={props.subname}
         extra={[
-            <Button key="1" type="ghost">Log out</Button>,
+            <Button key="1" type="ghost" size="small">Log out</Button>,
              
-            
         ]}
            
         />

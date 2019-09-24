@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
-import './../css/App.css';
 import { Layout, Menu,  Icon } from 'antd';
 import Head from './../components/Head';
+import Switc from './../components/Switc';
 const { Header, Content, Footer,Sider } = Layout;
 
 
@@ -11,10 +11,10 @@ class Home extends Component {
       return (
         <Layout className="layout" style={{ minHeight: '100vh' }} >
          <Sider 
-          style={{background:"#fff"}}
+          style={{background:""}}
           breakpoint="lg"
           collapsedWidth="80"
-          theme="light"
+          theme="dark"
           onBreakpoint={broken=>{
             console.log(broken)
           }}
@@ -23,7 +23,7 @@ class Home extends Component {
           }}>
             <div className="logo"/>
             <Menu
-              theme="light"
+              theme="dark"
               mode="vertical"
               defaultSelectedKeys={['1']}>
               <Menu.Item key="1">
@@ -42,11 +42,14 @@ class Home extends Component {
                 <Icon type="user" />
                 <span className="nav-text">nav 4</span>
               </Menu.Item>
+              <Menu.Item>
+                <Switc/>
+              </Menu.Item>
             </Menu>
          </Sider>
           <Layout className="layout">
             <Header style={{ background: '#fff', padding: 0 }}>
-              <Head name="Sistema NG" subname="home" />
+              <Head name="Sistema NG"  />
             </Header>
             <Content style={{ margin: '24px 16px 0' }} >
               <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>content</div>
