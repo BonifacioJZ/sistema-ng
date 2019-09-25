@@ -27,7 +27,7 @@ class LoginView extends Component {
             </div>
           </Row>
          </Content>
-         <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+         <Footer style={{ textAlign: 'center' }}>Bonifacio Juarez Ceja © </Footer>
         </Layout>
 
     );
