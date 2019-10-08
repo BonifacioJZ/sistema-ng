@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import { Layout, Menu,  Icon,Switch } from 'antd';
-//import Home from './Home';
-import AddPacienteView from './AddPacienteView';
+import Home from './Home';
+//import AddPacienteView from './AddPacienteView';
 const {Sider,Footer } = Layout;
 const {SubMenu} = Menu;
 
@@ -89,7 +89,7 @@ class Nav extends Component {
             </Menu>
          </Sider>
          <Layout className="layout">
-           <AddPacienteView/>
+           <Home/>
           <Footer style={{ textAlign: 'center' }}>Bonifacio Juarez Ceja ©</Footer>
          </Layout>
         </Layout>
