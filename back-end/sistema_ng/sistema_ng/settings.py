@@ -26,6 +26,9 @@ SECRET_KEY = 'l((k5l*0li=kaz44(@967r)yd$y&bcit1jc*s)3kd6*3=_!v5m'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+CORS_ORIGIN_WHITELIST = [
+    'https://localhost:3000'
+]
 
 
 # Application definition
@@ -39,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pruebas',
     'graphene_django',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -49,7 +53,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
+
 
 ROOT_URLCONF = 'sistema_ng.urls'
 

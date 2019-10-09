@@ -4,8 +4,7 @@ import {Form,Icon,Input,Button} from 'antd';
     handleSubmit = (e) => { 
         e.preventDefault(); 
         this.props.form.validateFields((err,values)=>{
-            if (!err) console.log('Received values of form: ', values);
-            else console.error(err)
+            (err)? console.error(err):console.log(values)
         })
     }
     render(){
@@ -14,16 +13,18 @@ import {Form,Icon,Input,Button} from 'antd';
             <Form onSubmit={this.handleSubmit} className="login-form">
                 <Form.Item>
                     {getFieldDecorator('username',{
-                        rules:[{required:true,message:'Please input your username!'}]
+                        rules:[
+                            {required:true,message:'Por favor introduzca  su Nombre de Usuario '},
+                            ]
                     })(
                         <Input
                             prefix={<Icon type="user" style={{color:'rgba(0,0,0,.25)'}}/>}
-                            placeholder="Username"/>,
+                            placeholder="Nombre de usuario"/>,
                     )}
                 </Form.Item>
                 <Form.Item>
                     {getFieldDecorator('password',{
-                        rules:[{required:true,message:'Please input your Password!'}],
+                        rules:[{required:true,message:'Por favor introduzca su Contraseña'}],
                     })(
                         <Input
                             prefix={<Icon type="lock" style={{color:'rgba(0,0,0,.25)'}}/>}
@@ -33,12 +34,9 @@ import {Form,Icon,Input,Button} from 'antd';
                     )}
                 </Form.Item>
                 <Form.Item>
-                    <a className="login-form-forgot" href="#">Forgot Password</a>
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </Button>
-                    Or <br></br>
-                    <a href="">register now!</a>
                 </Form.Item>
             </Form>
         )

@@ -17,7 +17,7 @@ class Home extends Component {
               <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                 <Row type="flex" gutter={16}>
                     <Col lg={{span:8}} md={{span:12}} xs={{span:24}}>
-                        <Option img="/img/hospital-840135__340.jpg" alt="paciente" title="Paciente"/>
+                        <Option img="/img/hospital-840135__340.jpg" alt="Paciente" title="Paciente"/>
                     </Col>
                     <Col lg={{span:8}} md={{span:12}} xs={{span:24}}>
                         <Option  img="/img/hospice-1821429_1920.jpg" alt="Pacientes" title="Pacientes" />
