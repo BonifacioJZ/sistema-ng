@@ -1,11 +1,31 @@
 import React,{Component} from 'react';
 import { Layout, PageHeader,Tag,Row,Col,Card} from 'antd';
 import Login from '../components/Forms/Login'
+import {gql} from 'apollo-boost';
+import {useMutation} from '@apollo/react-hooks';
 const {Header,Content,Footer} = Layout;
 
-class LoginView extends Component {
+
+ const USER_LOGIN = gql`
+                    mutation Login($input:LoginInput!){
+                        login(input:$input){
+                            ok,
+                            user{
+                              username,
+                              email
+                            }
+                        }
+                        
+                    }
+                `
+function LoginView()  {
+
+  const [login,{mutationError}]= useMutation(USER_LOGIN,{
+    onCompleted(data){
+      console.log(data)
+    }
+  })
  
-  render(){
       return (
         <Layout className="layout" style={{ minHeight: '100vh' }} >
          <Header style={{ background: '#fff', padding: 0 }} >
@@ -20,7 +40,7 @@ class LoginView extends Component {
            
               <Col>
                 <Card>
-                <Login/>
+                <Login mutation={login}/>
                 </Card>
               </Col>
             
@@ -32,7 +52,7 @@ class LoginView extends Component {
 
     );
     
-    }
+    
 }
 
 export default LoginView;
