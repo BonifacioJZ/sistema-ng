@@ -1,9 +1,13 @@
 import React,{Component} from 'react';
 import { Layout, Menu,  Icon,Switch } from 'antd';
 import Home from './Home';
-//import AddPacienteView from './AddPacienteView';
+import {Switch as Case,Route} from 'react-router-dom';
+import {ProtectedRoutes} from '../routes/ProtectedRoutes';
+import AddPacienteView from './AddPacienteView';
 const {Sider,Footer } = Layout;
 const {SubMenu} = Menu;
+
+
 
 
 
@@ -89,7 +93,13 @@ class Nav extends Component {
             </Menu>
          </Sider>
          <Layout className="layout">
-           <Home/>
+           <Case>
+                <ProtectedRoutes exact path="/home" component={Home}/>
+                <ProtectedRoutes exact path="/home/add-paciente" component={AddPacienteView}/>
+                <Route path="/home/*">
+                    <h1>404</h1>
+                </Route>
+           </Case>
           <Footer style={{ textAlign: 'center' }}>Bonifacio Juarez Ceja ©</Footer>
          </Layout>
         </Layout>

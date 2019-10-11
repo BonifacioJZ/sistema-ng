@@ -1,19 +1,13 @@
 
-
-
-
 class Auth {
     constructor(){
         this.authentication = false
     }
 
 
-    login(username="",password=""){
-      
-        return new Promise((resolve,reject)=>{
-            
-            
-        })
+    login(cb){
+      this.authentication = true
+      cb();
 
     }
     logout(cb){

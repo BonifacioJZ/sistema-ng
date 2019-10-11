@@ -3,6 +3,7 @@ import { Layout, PageHeader,Tag,Row,Col,Card} from 'antd';
 import Login from '../components/Forms/Login'
 import {gql} from 'apollo-boost';
 import {useMutation} from '@apollo/react-hooks';
+import Auth from '../variables/auth';
 import swal from 'sweetalert';
 const {Header,Content,Footer} = Layout;
 
@@ -16,21 +17,21 @@ const {Header,Content,Footer} = Layout;
                               email
                             }
                         }
-                        
                     }
                 `
-function LoginView()  {
+function LoginView(props)  {
 
-  const [login,{mutationError}]= useMutation(USER_LOGIN,{
+  const [login]= useMutation(USER_LOGIN,{
     onCompleted(data){
       console.log(data.login.ok)
       if(data.login.ok){
-        swal({
-          title:"Bienvenido",
-          timer:5000,
-          icon:"success"
-        })
+        Auth.login(()=>{
+          props.history.push("/home")
+        });
       }else{
+        Auth.logout(()=>{
+          console.log(Auth.isAuthentication())
+        })
         swal({
           title:"Error",
           icon:"error"
