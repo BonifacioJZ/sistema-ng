@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React from 'react';
 import { Layout, PageHeader,Tag,Row,Col,Card} from 'antd';
 import Login from '../components/Forms/Login'
 import {gql} from 'apollo-boost';
