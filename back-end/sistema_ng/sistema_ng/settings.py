@@ -46,6 +46,10 @@ INSTALLED_APPS = [
     'corsheaders'
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'graphql_jwt.backends.JSONWebTokenBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -57,7 +61,12 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
-
+GRAPHENE ={
+    'SCHEMA':'pruebas.shemas.schema',
+    'MIDDLEWARE':[
+        'graphql_jwt.middleware.JSONWebTokenMiddleware'
+    ]
+}
 
 ROOT_URLCONF = 'sistema_ng.urls'
 
