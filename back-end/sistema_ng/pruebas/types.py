@@ -19,6 +19,10 @@ class Query(ObjectType):
             return User.objects.get(pk=id)
         return None 
     def resolve_users(self,info,**kwargs):
+        user = info.context.user
+        print(user)
+        if user.is_anonymous:
+            raise Exception('Not logged in!')
         return User.objects.all()
     def resolve_login(self,info,**kwargs):
         username = kwargs.get('username')

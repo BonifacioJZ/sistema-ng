@@ -15,7 +15,8 @@ import {Form,Icon,Input,Button} from 'antd';
                     username:values.username,
                     password:values.password
                 }
-                this.props.mutation({variables:{input:user}})
+                this.props.mutation({variables:{username:user.username, password:user.password}})
+                
             }
 
         })

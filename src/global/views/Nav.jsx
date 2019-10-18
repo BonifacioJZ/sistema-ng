@@ -1,5 +1,5 @@
-import React,{Component} from 'react';
-import { Layout, Menu,  Icon,Switch } from 'antd';
+import React from 'react';
+import { Layout, Menu,  Icon } from 'antd';
 import Home from './Home';
 import {Switch as Case,Route} from 'react-router-dom';
 import {ProtectedRoutes} from '../routes/ProtectedRoutes';
@@ -11,25 +11,15 @@ const {SubMenu} = Menu;
 
 
 
-class Nav extends Component {
+function Nav() {
 
-  state ={
-    theme:"dark",
-  }
-  changeTheme = value =>{
-    this.setState({
-      theme:value?'dark':'light',
-    });
-  };
- 
-  render(){
+  
       return (
         <Layout className="layout" style={{ minHeight: '100vh' }} >
          <Sider 
           style={{background:""}}
           breakpoint="lg"
           collapsedWidth="80"
-          theme={this.state.theme}
           onBreakpoint={broken=>{
             console.log(broken)
           }}
@@ -38,7 +28,7 @@ class Nav extends Component {
           }}>
             <div className="logo"/>
             <Menu
-              theme={this.state.theme}
+              theme="dark"
               mode="inline"
               defaultSelectedKeys={['1']}>
               <SubMenu
@@ -75,21 +65,6 @@ class Nav extends Component {
                 <Icon type="user" />
                 <span className="nav-text">nav 4</span>
               </Menu.Item>
-              <SubMenu
-                key="sub1"
-                title={
-                  <span>
-                    <Icon type="bg-colors" />
-                    <span>Tema</span>
-                  </span>
-                }>
-                <Menu.Item>
-                  <Switch 
-                    checked={this.state.theme==="dark"}
-                    onChange={this.changeTheme}
-                  />
-                </Menu.Item>
-              </SubMenu>
             </Menu>
          </Sider>
          <Layout className="layout">
@@ -106,7 +81,6 @@ class Nav extends Component {
 
     );
     
-    }
 }
 
 export default Nav

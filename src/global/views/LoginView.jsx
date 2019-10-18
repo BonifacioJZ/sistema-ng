@@ -1,42 +1,37 @@
 import React from 'react';
 import { Layout, PageHeader,Tag,Row,Col,Card} from 'antd';
 import Login from '../components/Forms/Login'
-import {gql} from 'apollo-boost';
 import {useMutation} from '@apollo/react-hooks';
 import Auth from '../variables/auth';
 import swal from 'sweetalert';
+import  {USER_LOGIN} from '../Querys/Query';
 const {Header,Content,Footer} = Layout;
 
 
- const USER_LOGIN = gql`
-                    mutation Login($input:LoginInput!){
-                        login(input:$input){
-                            ok,
-                            user{
-                              username,
-                              email
-                            }
-                        }
-                    }
-                `
+
 function LoginView(props)  {
 
   const [login]= useMutation(USER_LOGIN,{
     onCompleted(data){
-      console.log(data.login.ok)
-      if(data.login.ok){
+      console.log(data)
+     
         Auth.login(()=>{
+          sessionStorage.setItem('session',1)
           props.history.push("/home")
+          sessionStorage.setItem('token',data.tokenAuth.token)
+          
         });
-      }else{
-        Auth.logout(()=>{
-          console.log(Auth.isAuthentication())
-        })
-        swal({
+    },
+    onError(error){
+      Auth.logout(()=>{
+        console.log(error)
+        console.log(Auth.isAuthentication())
+        sessionStorage.clear();
+      })
+      swal({
           title:"Error",
           icon:"error"
         })
-      }
     }
   })
  

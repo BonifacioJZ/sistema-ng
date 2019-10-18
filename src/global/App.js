@@ -1,28 +1,24 @@
-import React,{Component} from 'react';
-import './css/App.css';
-import LoginView from './views/LoginView';
-import {Switch,Route} from 'react-router-dom';
-import Nav from './views/Nav';
-import {ProtectedRoutes} from './routes/ProtectedRoutes';
-class App extends Component {
- 
-  render(){
-      return (
-      <div>
-        
-        <Switch>
-          <Route  exact path="/" component ={LoginView}/>
-          <Route path="/login" component = {LoginView}/>
-          <ProtectedRoutes path="/home" component =  {Nav} />
-          <Route path="*">
-              <h1>404</h1>
-          </Route>
-          
-        </Switch>
-      </div>
-      );
-    
-    }
+import React from 'react';
+import Session from './Session';
+import {VERIFY_TOKEN} from './Querys/Query';
+import {useMutation} from '@apollo/react-hooks';
+import Auth from './variables/auth';
+
+const  App = (props)=>{
+    const [VERIFY] = useMutation(VERIFY_TOKEN,{
+        onCompleted(data){
+            console.log(data);
+            Auth.login(()=>{
+                console.log("Permitido",Auth.isAuthentication())
+            })
+        },
+        onError(err){
+            sessionStorage.removeItem('session')
+        }
+    });
+    return (
+        <Session mutation={VERIFY} />
+    );
 }
 
-export default App;
+export default App
