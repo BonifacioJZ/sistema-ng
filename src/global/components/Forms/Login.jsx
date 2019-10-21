@@ -47,7 +47,7 @@ import {Form,Icon,Input,Button} from 'antd';
                     )}
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary" htmlType="submit"  className="login-form-button">
+                    <Button type="primary" htmlType="submit" icon="login"  className="login-form-button">
                         Log in
                     </Button>
                 </Form.Item>

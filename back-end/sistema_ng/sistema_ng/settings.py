@@ -71,7 +71,7 @@ GRAPHENE ={
 
 GRAPHQL_JWT = {
     'JWT_VERIFY_EXPIRATION': True,
-    'JWT_EXPIRATION_DELTA': timedelta(minutes=1),
+    'JWT_EXPIRATION_DELTA': timedelta(days=1),
 }
 
 ROOT_URLCONF = 'sistema_ng.urls'

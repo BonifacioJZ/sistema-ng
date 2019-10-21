@@ -9,7 +9,7 @@ import {ProtectedRoutes} from './routes/ProtectedRoutes';
 class Session extends Component{
   constructor(props) {
     super(props);
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
     if(token){
       this.props.mutation({variables:{token}})  
     }

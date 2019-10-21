@@ -1,9 +1,10 @@
 import React from 'react';
 import { Layout, Menu,  Icon } from 'antd';
 import Home from './Home';
-import {Switch as Case,Route} from 'react-router-dom';
+import {Switch as Case,Route,Link} from 'react-router-dom';
 import {ProtectedRoutes} from '../routes/ProtectedRoutes';
 import AddPacienteView from './AddPacienteView';
+
 const {Sider,Footer } = Layout;
 const {SubMenu} = Menu;
 
@@ -12,7 +13,6 @@ const {SubMenu} = Menu;
 
 
 function Nav() {
-
   
       return (
         <Layout className="layout" style={{ minHeight: '100vh' }} >
@@ -39,8 +39,8 @@ function Nav() {
                     <span className="nav-text">Paciente</span>
                   </span>
                 }>
-                <Menu.Item>Nav 1</Menu.Item>
-                <Menu.Item>Nav 2</Menu.Item>
+                <Menu.Item><Link to="/home/add-paciente">Crear Paciente</Link></Menu.Item>
+                <Menu.Item>Listar Pacientes</Menu.Item>
               </SubMenu>
               <SubMenu
                 key="2"

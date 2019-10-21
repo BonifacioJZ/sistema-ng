@@ -2,7 +2,7 @@ import React from 'react';
 import {Route,Redirect} from 'react-router-dom';
 let login=false
 export const ProtectedRoutes = ({component: Component,...rest}) =>{
-    if(sessionStorage.getItem('session')){
+    if(localStorage.getItem('session')){
         login=true
     }
     return (

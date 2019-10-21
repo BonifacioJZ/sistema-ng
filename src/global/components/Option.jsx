@@ -1,5 +1,6 @@
 import React ,{Component}from 'react';
 import {Card,Icon,Modal} from 'antd';
+import {Link} from 'react-router-dom';
 const {Meta} = Card
 class Option extends Component{
     state = {visible:false};
@@ -14,13 +15,14 @@ class Option extends Component{
             visible:false
         })
     }
+    
     handlerCancel= e =>{
         console.log(e);
         this.setState({
                 visible:false,
         });
     };
-
+   
     render(){
         return(
         <div>
@@ -32,7 +34,7 @@ class Option extends Component{
                     />
                 }
                 actions={[
-                    <Icon type="user-add" key="setting"/>,
+                    <Link to="/home/add-paciente"><Icon type="user-add"   key="setting"/></Link>,
                     <Icon type="edit" key="edit"/>,
                     <Icon type="info-circle" onClick={this.showModal} key="ellipsis"/>
                 ]}>
@@ -44,6 +46,7 @@ class Option extends Component{
             <Modal
                 title={this.props.title}
                 visible={this.state.visible}
+                
                 onOk={this.handlerOk}
                 onCancel={this.handlerCancel}>
                 <p>{this.props.description}</p>

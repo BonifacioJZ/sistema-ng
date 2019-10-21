@@ -15,7 +15,7 @@ class AddPaciente extends Component{
         const {getFieldDecorator} = this.props.form;
         const formItemLayout ={
             labelCol:{
-                xs:{span:28},
+                xs:{span:20},
                 sm:{span:8}
             },
             wrapperCol:{
@@ -30,7 +30,7 @@ class AddPaciente extends Component{
                     offset:0,
                 },
                 sm:{
-                    span:16,
+                    span:20,
                     offset:8,
                 },
             },

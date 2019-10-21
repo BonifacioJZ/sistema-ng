@@ -16,9 +16,10 @@ function LoginView(props)  {
       console.log(data)
      
         Auth.login(()=>{
-          sessionStorage.setItem('session',1)
+          localStorage.setItem('session',1)
+          localStorage.setItem('token',data.tokenAuth.token)
           props.history.push("/home")
-          sessionStorage.setItem('token',data.tokenAuth.token)
+          
           
         });
     },
@@ -26,7 +27,7 @@ function LoginView(props)  {
       Auth.logout(()=>{
         console.log(error)
         console.log(Auth.isAuthentication())
-        sessionStorage.clear();
+        localStorage.clear();
       })
       swal({
           title:"Error",

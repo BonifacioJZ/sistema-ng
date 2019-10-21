@@ -13,7 +13,7 @@ const  App = (props)=>{
             })
         },
         onError(err){
-            sessionStorage.removeItem('session')
+            localStorage.removeItem('session')
         }
     });
     return (
