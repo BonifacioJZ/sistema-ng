@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {Form, Input,Button,Select,Icon} from 'antd';
+import {Form, Input,InputNumber,Button,Select,Icon} from 'antd';
 
 class AddPaciente extends Component{
+
+    
     handlerSubmit = (e) => { 
         e.preventDefault(); 
         this.props.form.validateFieldsAndScroll((err,values)=>{
@@ -69,6 +71,20 @@ class AddPaciente extends Component{
                         })(<Input 
                             placeholder="Apellidos"
                         />)}
+                </Form.Item>
+                <Form.Item label ="Edad">
+                            {getFieldDecorator('age',{
+                                rules:[
+                                    {
+                                        required:true,
+                                        message:"La Edad es Requerida",
+                                    }
+                                ]
+                            })(<InputNumber
+                                min={0}
+                                max={204}
+                                placeholder="Edad"
+                            />)}
                 </Form.Item>
                 <Form.Item label="Numero de Telefono">
                             {getFieldDecorator('phone',{
