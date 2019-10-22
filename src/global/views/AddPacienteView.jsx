@@ -1,12 +1,10 @@
-import React,{Component} from 'react';
+import React from 'react';
 import {Layout,Row,Col} from 'antd';
 import Head2 from '../components/Head2'
 import AddPaciente from './../components/Forms/AddPaciente';
 const {Header,Content} = Layout;
 
-class AddPacienteView extends Component{
-    
-    render(){
+function AddPacienteView (){  
         var logout = ()=>{
             localStorage.clear()
             this.props.history.push("/")
@@ -25,7 +23,6 @@ class AddPacienteView extends Component{
                 </Content>
             </div>
         );
-    };
 };
 
 export default AddPacienteView

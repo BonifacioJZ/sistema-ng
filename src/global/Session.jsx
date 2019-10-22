@@ -4,6 +4,7 @@ import LoginView from './views/LoginView';
 import {Switch,Route} from 'react-router-dom';
 import Nav from './views/Nav';
 import {ProtectedRoutes} from './routes/ProtectedRoutes';
+import {PublicRoute} from './routes/PublicRoute';
 
 
 class Session extends Component{
@@ -20,8 +21,8 @@ class Session extends Component{
       <div>
         
         <Switch>
-          <Route  exact path="/" component ={LoginView}/>
-          <Route path="/login" component = {LoginView}/>
+          <PublicRoute  exact path="/" component ={LoginView}/>
+          <PublicRoute path="/login" component = {LoginView}/>
           <ProtectedRoutes path="/home" component =  {Nav} />
           <Route path="*">
               <h1>404</h1>

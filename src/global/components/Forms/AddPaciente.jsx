@@ -1,19 +1,29 @@
 import React, {Component} from 'react';
-import {Form, Input,InputNumber,Button,Select,Icon} from 'antd';
-
+import {Form, Input,InputNumber,Button,Select,Icon,DatePicker} from 'antd';
+import locale from 'antd/es/date-picker/locale/es_ES';
 class AddPaciente extends Component{
 
     
     handlerSubmit = (e) => { 
         e.preventDefault(); 
         this.props.form.validateFieldsAndScroll((err,values)=>{
-            if(!err) console.log('Recived Values of from',values);
+            if(!err){ 
+                console.log('Recived Values of from',values);
+                const value={
+                    ...values,
+                    'date-picker': values['date-picker'].format('YYYY-MM-DD')
+                }
+                console.log(value)
+            }
             else{
                 console.log(err)
             }
         })
+
     }
+    
     render(){
+        
         const {getFieldDecorator} = this.props.form;
         const formItemLayout ={
             labelCol:{
@@ -37,6 +47,10 @@ class AddPaciente extends Component{
                 },
             },
         };
+        const config = {
+            rules: [{ type: 'object', required: true, message: 'Please select time!' }],
+          };
+       
         const prefixSelector = getFieldDecorator('prefix',{
             initialValue:'52',
         })(
@@ -72,19 +86,21 @@ class AddPaciente extends Component{
                             placeholder="Apellidos"
                         />)}
                 </Form.Item>
-                <Form.Item label ="Edad">
-                            {getFieldDecorator('age',{
-                                rules:[
-                                    {
-                                        required:true,
-                                        message:"La Edad es Requerida",
-                                    }
-                                ]
-                            })(<InputNumber
-                                min={0}
-                                max={204}
-                                placeholder="Edad"
-                            />)}
+                <Form.Item label="Fecha de nacimiento">
+                            {getFieldDecorator('date-picker',
+                            config)(<DatePicker locale={locale}/>)}
+                </Form.Item>
+                <Form.Item label="Edad">
+                {getFieldDecorator('age', 
+                { 
+                    initialValue: 0,
+                    rules:[
+                        {required:true,message:"La Edad es Requerida"}
+                    ] 
+                },
+                )(
+                    <InputNumber min={0} max={204} />
+                )}
                 </Form.Item>
                 <Form.Item label="Numero de Telefono">
                             {getFieldDecorator('phone',{
