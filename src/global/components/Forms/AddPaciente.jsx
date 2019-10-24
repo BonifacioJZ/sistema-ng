@@ -11,9 +11,21 @@ class AddPaciente extends Component{
                 console.log('Recived Values of from',values);
                 const value={
                     ...values,
-                    'date-picker': values['date-picker'].format('YYYY-MM-DD')
+                    'date_picker': values['date-picker'].format('YYYY-MM-DD')
                 }
                 console.log(value)
+                let input={
+                    nombre:value.name,
+                    apellidos:value.last_name,
+                    birthday:value.date_picker,
+                    edad:value.age,
+                    telefono:value.phone,
+                    estado:value.state,
+                    ciudad:value.city,
+                    colonia:value.colonia
+
+                }
+                this.props.mutation({variables:{input:input}})
             }
             else{
                 console.log(err)

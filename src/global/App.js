@@ -5,6 +5,7 @@ import {useMutation} from '@apollo/react-hooks';
 import Auth from './variables/auth';
 
 const  App = (props)=>{
+   
     const [VERIFY] = useMutation(VERIFY_TOKEN,{
         onCompleted(data){
             console.log(data);

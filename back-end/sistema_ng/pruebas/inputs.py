@@ -8,5 +8,15 @@ class UserInput(graphene.InputObjectType):
 class LoginInput(graphene.InputObjectType):
     username = graphene.String()
     password = graphene.String()
+class PacienteInput(graphene.InputObjectType):
+    id = graphene.ID()
+    nombre = graphene.String()
+    apellidos = graphene.String()
+    birthday = graphene.String()
+    edad = graphene.Int()
+    telefono = graphene.String()
+    estado = graphene.String()
+    ciudad = graphene.String()
+    colonia = graphene.String()
     
     

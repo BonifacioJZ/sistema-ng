@@ -1,14 +1,15 @@
 from django.db import models
 
 # Create your models here.
-class Paciente (models.Model):
-    Name = models.CharField(max_length=100,blank=True, null=True),
-    Last_Names = models.CharField(max_length=100,blank=True, null=True)
-    Birthday = models.DateField(blank=True, null=True)
-    Age = models.IntegerField(blank=True, null=True),
-    Number_Phone= models.CharField(max_length=14,blank=True, null=True)
-    State = models.CharField(max_length=100,blank=True, null=True)
-    City = models.CharField(max_length=100,blank=True, null=True)
-    Suburn = models.CharField(max_length=100,blank=True, null=True)
+class paciente (models.Model):
+    nombre = models.CharField(max_length=100, blank=True, null=True)
+    apellidos = models.CharField(max_length=100,blank=True, null=True)
+    birthday = models.CharField(max_length=100,blank=True, null=True)
+    edad = models.IntegerField(blank=True, null=True)
+    telefono = models.CharField(max_length=13,blank=True, null=True)
+    estado = models.CharField(max_length=100,blank=True, null=True)
+    ciudad = models.CharField(max_length=100,blank=True, null=True)
+    colonia = models.CharField(max_length=100,blank=True, null=True)
+
 
     

@@ -1,9 +1,8 @@
 from django.contrib import admin
-from .models import Paciente
+from .models import paciente
 
-# Register your models here.
 class PacienteAdmin(admin.ModelAdmin):
-    list_display = ['Name','Last_Names']
+    display_list = ["nombre","apellido"]
 
 
-admin.site.register(Paciente,PacienteAdmin)
+admin.site.register(paciente,PacienteAdmin)
