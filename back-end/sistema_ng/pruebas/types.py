@@ -2,15 +2,20 @@ import graphene
 from graphene_django.types import DjangoObjectType, ObjectType 
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from .models import Paciente
 
 class UserType(DjangoObjectType):
     class Meta:
         model = User
+class PacienteType(DjangoObjectType):
+    class Meta:
+        model = Paciente
 
 class Query(ObjectType):
     user = graphene.Field(UserType,id=graphene.Int())
     users = graphene.List(UserType)
     login = graphene.Boolean(username=graphene.String(),password=graphene.String())
+    paciente = graphene.Field(PacienteType,id=graphene.Int())
 
     def resolve_user(self,info,**kwargs):
         id = kwargs.get('id')
