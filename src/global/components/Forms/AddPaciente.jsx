@@ -25,6 +25,7 @@ class AddPaciente extends Component{
     render(){
         
         const {getFieldDecorator} = this.props.form;
+    
         const formItemLayout ={
             labelCol:{
                 xs:{span:20},
@@ -60,7 +61,7 @@ class AddPaciente extends Component{
             </Select>
         );
         return(
-           <Form {...formItemLayout} onSubmit={this.handlerSubmit}>
+           <Form  layout="vertical" {...formItemLayout} onSubmit={this.handlerSubmit}>
                 <Form.Item label="Nombre">
                     {getFieldDecorator('name',{
                         rules:[
@@ -112,6 +113,37 @@ class AddPaciente extends Component{
                             style={{width:'100%'}} 
                             />)
                             }
+                </Form.Item>
+                <Form.Item label="Direccion" />
+                <Form.Item label="Estado">
+                            {getFieldDecorator('state',{
+                                initialValue:"Michoacan",
+                                rules:[{
+                                    required:true,
+                                    message:'El estado es requerido'
+                                }]
+                            })(<Input/>)}
+                </Form.Item>
+                <Form.Item label="Ciudad">
+                            {getFieldDecorator('city',{
+                                initialValue:"Coeneo",
+                                rules:[{
+                                    required:true,
+                                    message:'La Ciudad es Requerida'
+                                }]
+                            })(<Input/>)}
+                </Form.Item>
+                <Form.Item label="Colonia o Municipio">
+                            {getFieldDecorator('colonia',{
+                                initialValue:"San Pedro Tacaro",
+                                rules:[{
+                                    required:true,
+                                    message:'La Colonia o Municipio es Requerido'
+                                }]
+                            })(<Input/>)}
+                </Form.Item>
+                <Form.Item>
+
                 </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
                             <Button type="primary" htmlType="submit">

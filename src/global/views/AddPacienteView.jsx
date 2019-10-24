@@ -4,10 +4,10 @@ import Head2 from '../components/Head2'
 import AddPaciente from './../components/Forms/AddPaciente';
 const {Header,Content} = Layout;
 
-function AddPacienteView (){  
+function AddPacienteView (props){  
         var logout = ()=>{
             localStorage.clear()
-            this.props.history.push("/")
+            props.history.push("/")
         }
         return(
             <div>
