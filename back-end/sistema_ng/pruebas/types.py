@@ -25,7 +25,7 @@ class Query(ObjectType):
     user = graphene.Field(UserType,id=graphene.Int())
     users = graphene.List(UserType)
     pacientes = graphene.List(PacienteType)
-    pacientes2 = graphene.Field(PacientePaginatedType,page=graphene.Int())
+    patients = graphene.Field(PacientePaginatedType,page=graphene.Int())
 
     def resolve_user(self,info,**kwargs):
         id = kwargs.get('id')
@@ -43,7 +43,7 @@ class Query(ObjectType):
     def resolve_pacientes (self,info,**kwargs):
         return paciente.objects.all()
 
-    def resolve_pacientes2 (self,info,page):
+    def resolve_patients  (self,info,page):
         page_size = 2 
         qs = paciente.objects.all()
         return  get_paginator(qs,page_size,page,PacientePaginatedType)         

@@ -8,9 +8,9 @@ const  App = (props)=>{
    
     const [VERIFY] = useMutation(VERIFY_TOKEN,{
         onCompleted(data){
-            console.log(data);
+            
             Auth.login(()=>{
-                console.log("Permitido",Auth.isAuthentication())
+              
             })
         },
         onError(err){

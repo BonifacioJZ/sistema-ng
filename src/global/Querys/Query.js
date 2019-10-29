@@ -29,8 +29,8 @@ mutation CreatePaciete($input:PacienteInput!){
 //Consulta de los datos
 
 const PACIENTES_DATA = gql`
-query Pacientes2($page:Int!){
-  pacientes2(page:$page){
+query Patients($page:Int!){
+  patients(page:$page){
     page,
     pages,
     hasNext,

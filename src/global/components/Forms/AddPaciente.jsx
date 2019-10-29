@@ -8,12 +8,12 @@ class AddPaciente extends Component{
         e.preventDefault(); 
         this.props.form.validateFieldsAndScroll((err,values)=>{
             if(!err){ 
-                console.log('Recived Values of from',values);
+              
                 const value={
                     ...values,
                     'date_picker': values['date-picker'].format('YYYY-MM-DD')
                 }
-                console.log(value)
+               
                 let input={
                     nombre:value.name,
                     apellidos:value.last_name,
@@ -28,7 +28,7 @@ class AddPaciente extends Component{
                 this.props.mutation({variables:{input:input}})
             }
             else{
-                console.log(err)
+              
             }
         })
 

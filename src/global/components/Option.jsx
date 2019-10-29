@@ -13,14 +13,14 @@ class Option extends Component{
         });
     };
     handlerOk = e =>{
-        console.log(e);
+        
         this.setState({
             visible:false
         })
     }
     
     handlerCancel= e =>{
-        console.log(e);
+       
         this.setState({
                 visible:false,
                

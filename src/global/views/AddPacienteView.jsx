@@ -14,7 +14,7 @@ function AddPacienteView (props){
         }
         const [paciente] = useMutation(ADD_PACIENTE,{
             onCompleted(data){
-                console.log(data)
+                
                 swal({
                     title:"Exito",
                     text:"El Paciente fue creado con exito",

@@ -22,10 +22,10 @@ function Nav() {
           breakpoint="lg"
           collapsedWidth="80"
           onBreakpoint={broken=>{
-            console.log(broken)
+            
           }}
           onCollapse={(collapse,type)=>{
-            console.log(collapse,type)
+            
           }}>
             <div className="logo"/>
             <Menu

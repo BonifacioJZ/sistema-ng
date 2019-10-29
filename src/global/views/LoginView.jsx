@@ -13,7 +13,7 @@ function LoginView(props)  {
 
   const [login]= useMutation(USER_LOGIN,{
     onCompleted(data){
-      console.log(data)
+      
      
         Auth.login(()=>{
           localStorage.setItem('session',1)
@@ -25,8 +25,7 @@ function LoginView(props)  {
     },
     onError(error){
       Auth.logout(()=>{
-        console.log(error)
-        console.log(Auth.isAuthentication())
+        
         localStorage.clear();
       })
       swal({
