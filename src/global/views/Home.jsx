@@ -27,7 +27,7 @@ class Home extends Component {
                         <Option img="/img/hospital-840135__340.jpg" alt="Paciente" ruta="add-paciente" description={addPaciente} title="Paciente"/>
                     </Col>
                     <Col lg={{span:8}} md={{span:12}} xs={{span:24}}>
-                        <Option  img="/img/hospice-1821429_1920.jpg" alt="Pacientes" title="Pacientes" />
+                        <Option  img="/img/hospice-1821429_1920.jpg" ruta="listpaciente" alt="Pacientes" title="Pacientes" />
                     </Col>
                     <Col lg={{span:8}} md={{span:12}} xs={{span:24}}>
                         <Option  img="/img/isolated-1188036_1920.png" alt="Medicos" title="Medicos"/>

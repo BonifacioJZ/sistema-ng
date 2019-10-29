@@ -4,6 +4,7 @@ import Home from './Home';
 import {Switch as Case,Route,Link} from 'react-router-dom';
 import {ProtectedRoutes} from '../routes/ProtectedRoutes';
 import AddPacienteView from './AddPacienteView';
+import ListPaciente from './ListPaciente';
 
 const {Sider,Footer } = Layout;
 const {SubMenu} = Menu;
@@ -71,6 +72,7 @@ function Nav() {
            <Case>
                 <ProtectedRoutes exact path="/home" component={Home}/>
                 <ProtectedRoutes exact path="/home/add-paciente" component={AddPacienteView}/>
+                <ProtectedRoutes exact path="/home/listpaciente" component={ListPaciente} />
                 <Route path="/home/*">
                     <h1>404</h1>
                 </Route>

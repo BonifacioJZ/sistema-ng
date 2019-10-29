@@ -3,7 +3,10 @@ import {Card,Icon,Modal} from 'antd';
 import {Link} from 'react-router-dom';
 const {Meta} = Card
 class Option extends Component{
-    state = {visible:false};
+    state = {
+        visible:false,
+        url:`/home/${this.props.ruta}`
+    };
     showModal = ()=>{
         this.setState({
             visible:true
@@ -20,6 +23,7 @@ class Option extends Component{
         console.log(e);
         this.setState({
                 visible:false,
+               
         });
     };
    
@@ -34,7 +38,7 @@ class Option extends Component{
                     />
                 }
                 actions={[
-                    <Link to="/home/add-paciente"><Icon type="user-add"   key="setting"/></Link>,
+                    <Link to={this.state.url}><Icon type="user-add"   key="setting"/></Link>,
                     <Icon type="edit" key="edit"/>,
                     <Icon type="info-circle" onClick={this.showModal} key="ellipsis"/>
                 ]}>
