@@ -3,10 +3,14 @@ import {Pagination,Layout} from 'antd'
 const {Footer} = Layout;
 
 function ListP (){
+    let estado = {
+        page:1,
+        total:50
+    }
     return(
         <div>
             <Footer>
-                <Pagination defaultCurrent={1} pageSize={10}/>
+                <Pagination defaultCurrent={estado.page} total={estado.total}/>
             </Footer>
         </div>
     )

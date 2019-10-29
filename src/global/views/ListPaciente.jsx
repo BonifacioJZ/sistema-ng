@@ -4,7 +4,7 @@ import Head2 from './../components/Head2';
 import ListP from './../components/List/ListP'
 const {Header,Content} = Layout;
 function ListPaciente(props){
-
+    
     var logout = ()=>{
         localStorage.clear()
         props.history.push("/")

@@ -24,7 +24,27 @@ mutation CreatePaciete($input:PacienteInput!){
   }
 }
 `
+
 //Query's Consultas
+//Consulta de los datos
+
+const PACIENTES_DATA = gql`
+query Pacientes2($page:Int!){
+  pacientes2(page:$page){
+    page,
+    pages,
+    hasNext,
+    hasPrev,
+    objects{
+      nombre,
+      apellidos,
+      edad,
+      ciudad,
+      colonia
+    }
+  }
+}
+`;
 const PRUEBA_TOKEN = gql `
 {
   users{
@@ -32,11 +52,12 @@ const PRUEBA_TOKEN = gql `
   }
 }
 
-`
+`;
 
 export  {
  USER_LOGIN,
  VERIFY_TOKEN,
  PRUEBA_TOKEN,
- ADD_PACIENTE
+ ADD_PACIENTE,
+ PACIENTES_DATA
 }
