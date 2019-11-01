@@ -36,6 +36,7 @@ query Patients($page:Int!){
     hasNext,
     hasPrev,
     objects{
+      id,
       nombre,
       apellidos,
       edad,
