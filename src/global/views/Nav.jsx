@@ -6,6 +6,7 @@ import {ProtectedRoutes} from '../routes/ProtectedRoutes';
 import AddPacienteView from './AddPacienteView';
 import ListPaciente from './ListPaciente';
 import ExpedientePaciente  from './ExpedientePaciente';
+import Error404 from './Error404';
 
 const {Sider,Footer } = Layout;
 const {SubMenu} = Menu;
@@ -75,9 +76,7 @@ function Nav() {
                 <ProtectedRoutes exact path="/home/add-paciente" component={AddPacienteView}/>
                 <ProtectedRoutes exact path="/home/listpaciente" component={ListPaciente} />
                 <ProtectedRoutes exact path="/home/expedient-paciente/:id" component={ExpedientePaciente} />
-                <Route path="/home/*">
-                    <h1>404</h1>
-                </Route>
+                <Route path="/home/*" component={Error404} />
            </Case>
           <Footer style={{ textAlign: 'center' }}>Bonifacio Juarez Ceja ©</Footer>
          </Layout>

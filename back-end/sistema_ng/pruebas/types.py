@@ -1,9 +1,13 @@
-import graphene 
-from graphene_django.types import DjangoObjectType, ObjectType 
+from builtins import Exception
+
+import graphene
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from .models import paciente 
+from graphene_django.types import DjangoObjectType, ObjectType
+
+from .models import paciente
 from .pagination import get_paginator
+
 
 class UserType(DjangoObjectType):
     class Meta:
@@ -26,6 +30,7 @@ class Query(ObjectType):
     users = graphene.List(UserType)
     pacientes = graphene.List(PacienteType)
     patients = graphene.Field(PacientePaginatedType,page=graphene.Int())
+    patient = graphene.Field(PacienteType,id=graphene.Int())
 
     def resolve_user(self,info,**kwargs):
         id = kwargs.get('id')
@@ -44,6 +49,16 @@ class Query(ObjectType):
         return paciente.objects.all()
 
     def resolve_patients  (self,info,page):
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not logged in!')
         page_size = 10 
         qs = paciente.objects.all()
-        return  get_paginator(qs,page_size,page,PacientePaginatedType)         
+        return  get_paginator(qs,page_size,page,PacientePaginatedType) 
+
+    def resolve_patient(self,info,**kwargs):
+        id = kwargs.get('id')
+
+        if id is not None:
+            return paciente.objects.get(pk=id)
+        return None        
