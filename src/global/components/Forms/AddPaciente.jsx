@@ -1,21 +1,46 @@
 import React, {Component} from 'react';
-import {Form, Input,Button,Select,Icon} from 'antd';
-
+import {Form, Input,InputNumber,Button,Select,Icon,DatePicker} from 'antd';
+import locale from 'antd/es/date-picker/locale/es_ES';
 class AddPaciente extends Component{
+
+    
     handlerSubmit = (e) => { 
         e.preventDefault(); 
         this.props.form.validateFieldsAndScroll((err,values)=>{
-            if(!err) console.log('Recived Values of from',values);
+            if(!err){ 
+              
+                const value={
+                    ...values,
+                    'date_picker': values['date-picker'].format('YYYY-MM-DD')
+                }
+               
+                let input={
+                    nombre:value.name,
+                    apellidos:value.last_name,
+                    birthday:value.date_picker,
+                    edad:value.age,
+                    telefono:value.phone,
+                    estado:value.state,
+                    ciudad:value.city,
+                    colonia:value.colonia
+
+                }
+                this.props.mutation({variables:{input:input}})
+            }
             else{
-                console.log(err)
+              
             }
         })
+
     }
+    
     render(){
+        
         const {getFieldDecorator} = this.props.form;
+    
         const formItemLayout ={
             labelCol:{
-                xs:{span:28},
+                xs:{span:20},
                 sm:{span:8}
             },
             wrapperCol:{
@@ -30,11 +55,15 @@ class AddPaciente extends Component{
                     offset:0,
                 },
                 sm:{
-                    span:16,
+                    span:20,
                     offset:8,
                 },
             },
         };
+        const config = {
+            rules: [{ type: 'object', required: true, message: 'Please select time!' }],
+          };
+       
         const prefixSelector = getFieldDecorator('prefix',{
             initialValue:'52',
         })(
@@ -44,7 +73,7 @@ class AddPaciente extends Component{
             </Select>
         );
         return(
-           <Form {...formItemLayout} onSubmit={this.handlerSubmit}>
+           <Form  layout="vertical" {...formItemLayout} onSubmit={this.handlerSubmit}>
                 <Form.Item label="Nombre">
                     {getFieldDecorator('name',{
                         rules:[
@@ -70,6 +99,22 @@ class AddPaciente extends Component{
                             placeholder="Apellidos"
                         />)}
                 </Form.Item>
+                <Form.Item label="Fecha de nacimiento">
+                            {getFieldDecorator('date-picker',
+                            config)(<DatePicker locale={locale}/>)}
+                </Form.Item>
+                <Form.Item label="Edad">
+                {getFieldDecorator('age', 
+                { 
+                    initialValue: 0,
+                    rules:[
+                        {required:true,message:"La Edad es Requerida"}
+                    ] 
+                },
+                )(
+                    <InputNumber min={0} max={204} />
+                )}
+                </Form.Item>
                 <Form.Item label="Numero de Telefono">
                             {getFieldDecorator('phone',{
                                 rules:[{required:true,message:'El Numero de Telefono es Requerido'}]
@@ -80,6 +125,37 @@ class AddPaciente extends Component{
                             style={{width:'100%'}} 
                             />)
                             }
+                </Form.Item>
+                <Form.Item label="Direccion" />
+                <Form.Item label="Estado">
+                            {getFieldDecorator('state',{
+                                initialValue:"Michoacan",
+                                rules:[{
+                                    required:true,
+                                    message:'El estado es requerido'
+                                }]
+                            })(<Input/>)}
+                </Form.Item>
+                <Form.Item label="Ciudad">
+                            {getFieldDecorator('city',{
+                                initialValue:"Coeneo",
+                                rules:[{
+                                    required:true,
+                                    message:'La Ciudad es Requerida'
+                                }]
+                            })(<Input/>)}
+                </Form.Item>
+                <Form.Item label="Colonia o Municipio">
+                            {getFieldDecorator('colonia',{
+                                initialValue:"San Pedro Tacaro",
+                                rules:[{
+                                    required:true,
+                                    message:'La Colonia o Municipio es Requerido'
+                                }]
+                            })(<Input/>)}
+                </Form.Item>
+                <Form.Item>
+
                 </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
                             <Button type="primary" htmlType="submit">

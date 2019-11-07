@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,7 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 CORS_ORIGIN_WHITELIST = [
-    'https://localhost:3000'
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
 ]
 
 
@@ -42,9 +44,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pruebas',
     'graphene_django',
-    'corsheaders'
+    'corsheaders',
+    'pacientes',
+    'api'
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'graphql_jwt.backends.JSONWebTokenBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -56,7 +64,19 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
+GRAPHENE ={
+    'SCHEMA':[
+        'pruebas.shemas.schema'
+        'pacientes.shemas.schema'],
+    'MIDDLEWARE':[
+        'graphql_jwt.middleware.JSONWebTokenMiddleware'
+    ]
+}
 
+GRAPHQL_JWT = {
+    'JWT_VERIFY_EXPIRATION': True,
+    'JWT_EXPIRATION_DELTA': timedelta(days=1),
+}
 
 ROOT_URLCONF = 'sistema_ng.urls'
 

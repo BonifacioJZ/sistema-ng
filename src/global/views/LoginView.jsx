@@ -1,11 +1,40 @@
-import React,{Component} from 'react';
+import React from 'react';
 import { Layout, PageHeader,Tag,Row,Col,Card} from 'antd';
 import Login from '../components/Forms/Login'
+import {useMutation} from '@apollo/react-hooks';
+import Auth from '../variables/auth';
+import swal from 'sweetalert';
+import  {USER_LOGIN} from '../Querys/Query';
 const {Header,Content,Footer} = Layout;
 
-class LoginView extends Component {
+
+
+function LoginView(props)  {
+
+  const [login]= useMutation(USER_LOGIN,{
+    onCompleted(data){
+      
+     
+        Auth.login(()=>{
+          localStorage.setItem('session',1)
+          localStorage.setItem('token',data.tokenAuth.token)
+          props.history.push("/home")
+          
+          
+        });
+    },
+    onError(error){
+      Auth.logout(()=>{
+        
+        localStorage.clear();
+      })
+      swal({
+          title:"Error",
+          icon:"error"
+        })
+    }
+  })
  
-  render(){
       return (
         <Layout className="layout" style={{ minHeight: '100vh' }} >
          <Header style={{ background: '#fff', padding: 0 }} >
@@ -20,7 +49,7 @@ class LoginView extends Component {
            
               <Col>
                 <Card>
-                <Login/>
+                <Login mutation={login}/>
                 </Card>
               </Col>
             
@@ -32,7 +61,7 @@ class LoginView extends Component {
 
     );
     
-    }
+    
 }
 
 export default LoginView;

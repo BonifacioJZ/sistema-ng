@@ -1,40 +1,36 @@
-import React,{Component} from 'react';
-import { Layout, Menu,  Icon,Switch } from 'antd';
+import React from 'react';
+import { Layout, Menu,  Icon } from 'antd';
 import Home from './Home';
-//import AddPacienteView from './AddPacienteView';
+import {Switch as Case,Route,Link} from 'react-router-dom';
+import {ProtectedRoutes} from '../routes/ProtectedRoutes';
+import AddPacienteView from './AddPacienteView';
+import ListPaciente from './ListPaciente';
+import ExpedientePaciente  from './ExpedientePaciente';
+
 const {Sider,Footer } = Layout;
 const {SubMenu} = Menu;
 
 
 
-class Nav extends Component {
 
-  state ={
-    theme:"dark",
-  }
-  changeTheme = value =>{
-    this.setState({
-      theme:value?'dark':'light',
-    });
-  };
- 
-  render(){
+
+function Nav() {
+  
       return (
         <Layout className="layout" style={{ minHeight: '100vh' }} >
          <Sider 
           style={{background:""}}
           breakpoint="lg"
           collapsedWidth="80"
-          theme={this.state.theme}
           onBreakpoint={broken=>{
-            console.log(broken)
+            
           }}
           onCollapse={(collapse,type)=>{
-            console.log(collapse,type)
+            
           }}>
             <div className="logo"/>
             <Menu
-              theme={this.state.theme}
+              theme="dark"
               mode="inline"
               defaultSelectedKeys={['1']}>
               <SubMenu
@@ -45,19 +41,19 @@ class Nav extends Component {
                     <span className="nav-text">Paciente</span>
                   </span>
                 }>
-                <Menu.Item>Nav 1</Menu.Item>
-                <Menu.Item>Nav 2</Menu.Item>
+                <Menu.Item><Link to="/home/add-paciente">Crear Paciente</Link></Menu.Item>
+                <Menu.Item><Link to="/home/listpaciente" >Listar Pacientes</Link></Menu.Item>
               </SubMenu>
               <SubMenu
                 key="2"
                 title={
                   <span>
-                    <Icon type="team" />
-                    <span className="nav-text">Pacientes</span>
+                    <Icon type="profile" />
+                    <span className="nav-text">Expedientes</span>
                   </span>
                 }>
                 <Menu.Item>
-                  nav 1
+                 <Link to="/home/expedient-paciente">Crear Expediente</Link>
                 </Menu.Item>
                 <Menu.Item>
                   nav2
@@ -71,32 +67,24 @@ class Nav extends Component {
                 <Icon type="user" />
                 <span className="nav-text">nav 4</span>
               </Menu.Item>
-              <SubMenu
-                key="sub1"
-                title={
-                  <span>
-                    <Icon type="bg-colors" />
-                    <span>Tema</span>
-                  </span>
-                }>
-                <Menu.Item>
-                  <Switch 
-                    checked={this.state.theme==="dark"}
-                    onChange={this.changeTheme}
-                  />
-                </Menu.Item>
-              </SubMenu>
             </Menu>
          </Sider>
          <Layout className="layout">
-           <Home/>
+           <Case>
+                <ProtectedRoutes exact path="/home" component={Home}/>
+                <ProtectedRoutes exact path="/home/add-paciente" component={AddPacienteView}/>
+                <ProtectedRoutes exact path="/home/listpaciente" component={ListPaciente} />
+                <ProtectedRoutes exact path="/home/expedient-paciente/:id" component={ExpedientePaciente} />
+                <Route path="/home/*">
+                    <h1>404</h1>
+                </Route>
+           </Case>
           <Footer style={{ textAlign: 'center' }}>Bonifacio Juarez Ceja ©</Footer>
          </Layout>
         </Layout>
 
     );
     
-    }
 }
 
 export default Nav

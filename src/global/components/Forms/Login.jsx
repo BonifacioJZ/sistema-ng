@@ -1,16 +1,29 @@
 import React ,{Component}from 'react';
 import {Form,Icon,Input,Button} from 'antd';
+
+
  class Login extends Component{
-    handleSubmit = (e) => { 
+
+    render(){
+        //const [login,{mutationError}]= useMutation(USER_LOGIN)
+        const  handleSubmit = (e) => { 
         e.preventDefault(); 
         this.props.form.validateFields((err,values)=>{
-            (err)? console.error(err):console.log(values)
+            if(err)console.err(err)
+            else{
+                let user ={
+                    username:values.username,
+                    password:values.password
+                }
+                this.props.mutation({variables:{username:user.username, password:user.password}})
+                
+            }
+
         })
     }
-    render(){
         const {getFieldDecorator}= this.props.form;
         return (
-            <Form onSubmit={this.handleSubmit} className="login-form">
+            <Form onSubmit={handleSubmit} className="login-form">
                 <Form.Item>
                     {getFieldDecorator('username',{
                         rules:[
@@ -34,7 +47,7 @@ import {Form,Icon,Input,Button} from 'antd';
                     )}
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary" htmlType="submit" className="login-form-button">
+                    <Button type="primary" htmlType="submit" icon="login"  className="login-form-button">
                         Log in
                     </Button>
                 </Form.Item>
