@@ -7,7 +7,7 @@ export default function Head(props){
         className="header"
         title={props.name} 
         extra={[
-            <Button key="1" type="ghost" icon="logout" size="small" onClick={props.function}>Log out</Button>,
+            <Button key="1" type="ghost" icon="logout" size="small" onClick={props.function}>Salir</Button>,
              
         ]}
            

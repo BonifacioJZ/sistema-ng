@@ -5,6 +5,7 @@ import {Switch as Case,Route,Link} from 'react-router-dom';
 import {ProtectedRoutes} from '../routes/ProtectedRoutes';
 import AddPacienteView from './AddPacienteView';
 import ListPaciente from './ListPaciente';
+import ExpedientePaciente  from './ExpedientePaciente';
 
 const {Sider,Footer } = Layout;
 const {SubMenu} = Menu;
@@ -41,18 +42,18 @@ function Nav() {
                   </span>
                 }>
                 <Menu.Item><Link to="/home/add-paciente">Crear Paciente</Link></Menu.Item>
-                <Menu.Item>Listar Pacientes</Menu.Item>
+                <Menu.Item><Link to="/home/listpaciente" >Listar Pacientes</Link></Menu.Item>
               </SubMenu>
               <SubMenu
                 key="2"
                 title={
                   <span>
-                    <Icon type="team" />
-                    <span className="nav-text">Pacientes</span>
+                    <Icon type="profile" />
+                    <span className="nav-text">Expedientes</span>
                   </span>
                 }>
                 <Menu.Item>
-                  nav 1
+                 <Link to="/home/expedient-paciente">Crear Expediente</Link>
                 </Menu.Item>
                 <Menu.Item>
                   nav2
@@ -73,6 +74,7 @@ function Nav() {
                 <ProtectedRoutes exact path="/home" component={Home}/>
                 <ProtectedRoutes exact path="/home/add-paciente" component={AddPacienteView}/>
                 <ProtectedRoutes exact path="/home/listpaciente" component={ListPaciente} />
+                <ProtectedRoutes exact path="/home/expedient-paciente/:id" component={ExpedientePaciente} />
                 <Route path="/home/*">
                     <h1>404</h1>
                 </Route>

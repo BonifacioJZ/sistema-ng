@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pruebas',
     'graphene_django',
-    'corsheaders'
+    'corsheaders',
+    'pacientes',
+    'api'
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -63,7 +65,9 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 GRAPHENE ={
-    'SCHEMA':'pruebas.shemas.schema',
+    'SCHEMA':[
+        'pruebas.shemas.schema'
+        'pacientes.shemas.schema'],
     'MIDDLEWARE':[
         'graphql_jwt.middleware.JSONWebTokenMiddleware'
     ]

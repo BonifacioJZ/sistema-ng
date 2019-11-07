@@ -11,7 +11,7 @@ export default function Head2 (props){
                window.history.back()
            }}
            extra={[
-            <Button key="1" type="ghost" icon="logout" size="small" onClick={props.function}>Log out</Button>,   
+            <Button key="1" type="ghost" icon="logout" size="small" onClick={props.function}>Salir</Button>,   
         ]}
        />
     )

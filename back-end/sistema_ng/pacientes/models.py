@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class paciente (models.Model):
+class patient (models.Model):
     nombre = models.CharField(max_length=100, blank=True, null=True)
     apellidos = models.CharField(max_length=100,blank=True, null=True)
     birthday = models.CharField(max_length=100,blank=True, null=True)
