@@ -3,8 +3,8 @@ import {Icon,Button} from 'antd';
 import {Link} from 'react-router-dom'
 
 
-function IconText({type,theme,id}){
-    const url =    `/home/expedient-paciente/${id}`
+function IconText({type,theme,id,direccion}){
+    const url =    `${direccion}/${id}`
     return(
         <span>
             <Link to={url}>

@@ -2,6 +2,7 @@ import React from 'react';
 import {List,Button,Icon,Modal} from 'antd';
 import IconText from './../simplecomponents/IconText';
 import axios from 'axios';
+const token = localStorage.getItem('token')
 class ListP extends React.Component{
     
     state={
@@ -32,6 +33,8 @@ class ListP extends React.Component{
         });
     };
     async componentDidMount(){
+       
+      
         const data = await axios({
             url:"http://localhost:8000/graphql/",
             method:"POST",
@@ -48,20 +51,23 @@ class ListP extends React.Component{
                             nombre,
                             apellidos,
                             edad,
-                            ciudad,
-                            colonia
+                            birthday
                     }
                     }
                 }`
             },
+            headers:{
+                Authorization:`JWT ${token}`
+            }
             
         })
-       const json =  await data.data.data.patients.objects
+        let json =[]
+        data.data.data.patients?json =  await data.data.data.patients.objects:json=[]
        this.setState({
            data:json,
            loading:false
        })
-       console.log(this.state.data)
+       
         
         
 
@@ -92,6 +98,9 @@ class ListP extends React.Component{
                     }
                     }
                 }`
+            },
+            headers:{
+                Authorization:`JWT ${token}`
             }
         })
         data.then(res=>{
@@ -99,6 +108,12 @@ class ListP extends React.Component{
             this.setState({
                 loading:false,
                 data:res.data.data.patients.objects
+            })
+        }).catch(error=>{
+            console.error(error)
+            this.setState({
+                loading:true,
+                data:[]
             })
         })
 
@@ -130,7 +145,7 @@ class ListP extends React.Component{
                     key={item.id}
                     actions={[
                         <IconText type="edit" theme="twoTone" id={item.id} />,
-                        <IconText type="file-add" theme="twoTone"/>,
+                        <IconText type="file-add" direccion="/home/expedient-paciente" theme="twoTone" id={item.id}/>,
                         <IconText type="read" theme="filled"/>
                     ]}>
                         <List.Item.Meta
