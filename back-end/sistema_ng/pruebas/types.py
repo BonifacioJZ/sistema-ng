@@ -39,24 +39,6 @@ class Query(ObjectType):
         if user.is_anonymous:
             raise Exception('Not logged in!')
         return User.objects.all()
-<<<<<<< HEAD
-    
-    
-    def resolve_login(self,info,**kwargs):
-        username = kwargs.get('username')
-        password = kwargs.get('password')
-        ok = False
-
-        if username is not None:
-            if password is not None:
-                authenticat = authenticate(username=username,password=password)
-                print(authenticat)
-                if authenticat is not None:
-                    ok = True
-                    return ok
-
-        return ok 
-=======
 
     def resolve_pacientes (self,info,**kwargs):
         return paciente.objects.all()
@@ -65,4 +47,3 @@ class Query(ObjectType):
         page_size = 10 
         qs = paciente.objects.all()
         return  get_paginator(qs,page_size,page,PacientePaginatedType)         
->>>>>>> desarrollo
