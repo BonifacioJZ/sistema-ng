@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'graphene_django',
     'corsheaders',
     'pacientes',
-    'api'
+    'medicine',
+    'api',
 ]
 
 AUTHENTICATION_BACKENDS = [
