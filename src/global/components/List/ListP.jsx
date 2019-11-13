@@ -144,9 +144,9 @@ class ListP extends React.Component{
                     <List.Item
                     key={item.id}
                     actions={[
-                        <IconText type="edit" theme="twoTone" id={item.id} />,
-                        <IconText type="file-add" direccion="/home/expedient-paciente" theme="twoTone" id={item.id}/>,
-                        <IconText type="read" theme="filled"/>
+                        <IconText type="edit" theme="twoTone" color="#52c41a" id={item.id} />,
+                        <IconText type="file-add" color="#52c41a" direccion="/home/expedient-paciente" theme="twoTone" id={item.id}/>,
+                        <IconText type="profile" color="#52c41a" theme="twoTone"/>
                     ]}>
                         <List.Item.Meta
                         title={`${item.nombre.toUpperCase()} ${item.apellidos.toUpperCase()}`}

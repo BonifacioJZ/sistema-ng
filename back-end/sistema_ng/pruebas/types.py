@@ -39,10 +39,12 @@ class Query(ObjectType):
     patient = graphene.Field(PacienteType,id=graphene.Int())
     expedients = graphene.List(ExpedientType)
     expedient = graphene.Field(ExpedientType,id=graphene.ID())
-    medicinas = graphene.List(MedicinaType)
+    medicines = graphene.List(MedicinaType)
     medicina = graphene.Field(MedicinaType, id= graphene.ID())
 
-    
+    def resolve_medicines(self,info,**kwargs):
+        return medicina.objects.all()
+
     def resolve_user(self,info,**kwargs):
         id = kwargs.get('id')
 
@@ -79,6 +81,7 @@ class Query(ObjectType):
         if id is not None:
             return expediente.objects.get(pk=id)
         return None
+
     def resolve_medicina(self,info,**kwargs):
         id = kwargs.get('id')
         
@@ -87,9 +90,8 @@ class Query(ObjectType):
         return None
     
 
-    def reslove_expedientes(self,info,**kwargs):
+    def reslove_expedients(self,info,**kwargs):
         return expediente.objects.all()
 
 
-    def reslove_medicinas(self,info,**kwargs):
-        return medicina.objects.all()
+   

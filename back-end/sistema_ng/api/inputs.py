@@ -22,7 +22,7 @@ class PatientInput(graphene.InputObjectType):
 class MedicineInput(graphene.InputObjectType):
     id = graphene.ID()
     nombre = graphene.String()
-    formala = graphene.String()
+    formula = graphene.String()
     descripcion = graphene.String()
 
 class ExpedientInput(graphene.InputObjectType):

@@ -3,6 +3,7 @@ import {Layout} from 'antd';
 import {useParams} from 'react-router-dom';
 import Head2 from './../components/Head2'
 import CardPaciente from './../components/Forms/CardPaciente';
+import CardFormE from './../components/card/CardFormE';
 const {Header,Content} = Layout;
 
 function ExpedientePaciente (props){
@@ -19,6 +20,8 @@ function ExpedientePaciente (props){
                 <Content  style={{ margin: '24px 16px 0' }} >
                     <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                         <CardPaciente id={id} />
+                        <br/>
+                        <CardFormE/>
                     </div>
                 </Content>
             </div>

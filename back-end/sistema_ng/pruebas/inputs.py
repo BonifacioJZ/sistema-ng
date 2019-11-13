@@ -24,6 +24,12 @@ class MedicineInput(graphene.InputObjectType):
     nombre = graphene.String()
     formula = graphene.String()
     descripcion = graphene.String()
-    
-    
-    
+
+class ExpedientInput(graphene.InputObjectType):
+    peso = graphene.String()
+    altura = graphene.String()
+    pulso = graphene.String()
+    respiracion = graphene.String()
+    temperatura = graphene.String()
+    medicinas = graphene.List(MedicineInput)
+
