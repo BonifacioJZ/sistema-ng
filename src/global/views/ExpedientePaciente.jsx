@@ -12,6 +12,7 @@ function ExpedientePaciente (props){
         localStorage.clear()
         props.history.push("/")
     }
+    
         return(
             <div>
                 <Header className="header" style={{ background: '#fff', padding: 0 }}>
@@ -21,7 +22,7 @@ function ExpedientePaciente (props){
                     <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                         <CardPaciente id={id} />
                         <br/>
-                        <CardFormE/>
+                        <CardFormE id ={id} />
                     </div>
                 </Content>
             </div>

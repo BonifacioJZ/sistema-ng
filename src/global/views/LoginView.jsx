@@ -3,8 +3,8 @@ import { Layout, PageHeader,Tag,Row,Col,Card} from 'antd';
 import Login from '../components/Forms/Login'
 import {useMutation} from '@apollo/react-hooks';
 import Auth from '../variables/auth';
-import swal from 'sweetalert';
 import  {USER_LOGIN} from '../Querys/Query';
+import Swal from 'sweetalert2';
 const {Header,Content,Footer} = Layout;
 
 
@@ -28,7 +28,7 @@ function LoginView(props)  {
         
         localStorage.clear();
       })
-      swal({
+      Swal.fire({
           title:"Error",
           icon:"error"
         })

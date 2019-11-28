@@ -7,6 +7,9 @@ import AddPacienteView from './AddPacienteView';
 import ListPaciente from './ListPaciente';
 import ExpedientePaciente  from './ExpedientePaciente';
 import Error404 from './Error404';
+import UpdatePacienteView from './UpdatePacienteview';
+import InfoPaciente from './InfoPaciente';
+import pruebas from './pruebas';
 
 const {Sider,Footer } = Layout;
 const {SubMenu} = Menu;
@@ -60,14 +63,6 @@ function Nav() {
                   nav2
                 </Menu.Item>
               </SubMenu>
-              <Menu.Item key="3">
-                <Icon type="upload"/>
-                <span className="nav-text">nav 3</span>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Icon type="user" />
-                <span className="nav-text">nav 4</span>
-              </Menu.Item>
             </Menu>
          </Sider>
          <Layout className="layout">
@@ -76,6 +71,9 @@ function Nav() {
                 <ProtectedRoutes exact path="/home/add-paciente" component={AddPacienteView}/>
                 <ProtectedRoutes exact path="/home/listpaciente" component={ListPaciente} />
                 <ProtectedRoutes exact path="/home/expedient-paciente/:id" component={ExpedientePaciente} />
+                <ProtectedRoutes exact path="/home/update-paciente/:id" component={UpdatePacienteView} />
+                <ProtectedRoutes exact path="/home/info-paciente/:id" component={InfoPaciente} />
+                <ProtectedRoutes exact path="/home/pruebas" component={pruebas} />
                 <Route path="/home/*" component={Error404} />
            </Case>
           <Footer style={{ textAlign: 'center' }}>Bonifacio Juarez Ceja ©</Footer>

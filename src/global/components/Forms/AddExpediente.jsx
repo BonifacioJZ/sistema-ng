@@ -1,12 +1,63 @@
 import React from 'react';
-import {Form,Input,Col,Row,Button} from 'antd'
+import {Form,Input,Col,Row,Button,Select} from 'antd';
+import axios from 'axios';
+import {url} from './../../variables/os';
+const {Option} = Select;
 
+const token  = localStorage.getItem('token')
+const children =[]
 class AddExpediente extends React.Component{
+
+
+     async componentDidMount(){
+        const data = await axios({
+            url,
+            method:"POST",
+            data:{
+                query:`
+                query{
+                    medicines{
+                        id,
+                        nombre
+                    }
+                }`
+            },
+            headers:{
+                Authorization:`JWT ${token}`
+            }
+            
+        })
+        let date = []
+        data.data.data.medicines? date = await data.data.data.medicines: date =[]
+       
+        
+        for (let i=0;i<date.length;i++){
+            let valor =`${date[i].id}#${date[i].nombre}`
+            children.push(<Option key={date[i].id} value={valor} label={date[i].nombre} >{date[i].nombre}</Option>)
+        }
+        
+    }
     handleSubmit = e => {
         e.preventDefault();
+        
         this.props.form.validateFields((err, values) => {
           if (!err) {
-            console.log('Received values of form: ', values);
+             let  medicines = []
+              for (let i = 0;i<values.medicine.length;i++){
+                  let split = values.medicine[i].split("#")
+                  medicines.push({id:split[0]})
+              }
+              let variables = {
+                  pulso:values.pulso,
+                  temperatura:values.temperatura,
+                  respiracion:values.respiracion,
+                  precionD:values.presion_d,
+                  precionS:values.presion_s,
+                  medicinas:medicines,
+                  paciente:[{id:this.props.id}]
+              }
+              this.props.mutation({variables:{input:variables}})
+              console.log(variables)
           }
         });
       };
@@ -14,41 +65,52 @@ class AddExpediente extends React.Component{
         const { getFieldDecorator } = this.props.form;
         return(
             <Form  layout="horizontal" onSubmit={this.handleSubmit} >
-                <Row gutter={24} >
-                    <Col span={8}>
-                        <Form.Item label="Peso">
-                            {getFieldDecorator('peso',{
-                                rules:[]
-                            })(<Input  placeholder="peso" />)}
-                        </Form.Item>
-                    </Col>
-                    <Col span={8} >
-                        <Form.Item label="Altura">
-                            {getFieldDecorator('altura',{
-                                rules:[]
-                            })(<Input placeholder="altura"/>)}
-                        </Form.Item>
-                    </Col>
-                    <Col span={8} >
+                <Row  type="flex" gutter={24} >
+                    <Col xs={24} md={8} span={8} >
                         <Form.Item label="Pulso" >
                             {getFieldDecorator('pulso',{
-
+                                rules:[{required:true}]
                             })(<Input placeholder="Pulso" />)}
                         </Form.Item>
                     </Col>
-                    <Col span={8} >
+                    <Col xs={24} md={8} span={8} >
                         <Form.Item label="Respiracion">
                             {getFieldDecorator('respiracion',{
-
+                                rules:[{required:true}]
                             })(<Input placeholder="Respiracion" />)}
                         </Form.Item>
                     </Col>
-                    <Col span={8} >
+                    <Col xs={24} md={8} span={8} >
                         <Form.Item label ="Temperatura">
                             {getFieldDecorator('temperatura',{
-
+                                rules:[{required:true}]
                             })(<Input placeholder="Temperatura" />)}
                         </Form.Item>
+                    </Col>
+                    <Col xs={24} md={8} span={8}> 
+                            <Form.Item label="Presion Sistolica">
+                                {getFieldDecorator('presion_s',{
+                                    rules:[{required:true}]
+                                })(<Input placeholder="Precion Sistolica"/>)}
+                            </Form.Item>
+                    </Col>
+                    <Col xs={24} md={8} span={8}>
+                                <Form.Item label="Precion Diastolica">
+                                    {getFieldDecorator('presion_d',{
+                                        rules:[{required:true}]
+                                    })(<Input placeholder="Precion Diastolica" />)}
+                                </Form.Item> 
+                    </Col>
+                    <Col xs={24}  md={16} span={16} >
+                         <Form.Item label="Medicinas">
+                             {getFieldDecorator('medicine',{
+                                rules:[{required:true}]
+                             })(<Select
+                             mode="multiple"
+                             style={{with:'100%'}} 
+                             placeholder="Selecione una medicina"
+                             >{children}</Select>)}
+                         </Form.Item>
                     </Col>
                 </Row>
                 <Row>

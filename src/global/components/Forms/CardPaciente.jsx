@@ -1,7 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import {Card,Descriptions} from 'antd';
+import { url } from '../../variables/os'; 
+
 const token = localStorage.getItem('token')
+
 class CardPaciente extends React.Component{
 
     constructor(props){
@@ -15,7 +18,7 @@ class CardPaciente extends React.Component{
 
     async componentDidMount(){
         const data = await axios({
-            url:"http://localhost:8000/graphql/",
+            url,
             method:"POST",
             data:{
                 query:`
@@ -46,17 +49,16 @@ class CardPaciente extends React.Component{
             date,
             nombre:nombre.toUpperCase()
         })
-        console.log(this.state.date)
 
     }
     render(){
         return(
             <div>
                 <Card title={this.state.nombre}>
-                    <Descriptions title="Informacion" bordered>
+                    <Descriptions title="Informacion" >
                         <Descriptions.Item label="Fecha de Nacimiento" span={3} >{this.state.date.birthday}</Descriptions.Item>
-                        <Descriptions.Item label="Edad" span={2}>{this.state.date.edad}</Descriptions.Item>
-                        <Descriptions.Item label="Telefono">{this.state.date.telefono}</Descriptions.Item>
+                        <Descriptions.Item label="Edad" span={3}>{this.state.date.edad}</Descriptions.Item>
+                        <Descriptions.Item label="Telefono" span={3} >{this.state.date.telefono}</Descriptions.Item>
                         <Descriptions.Item label="Localidad" span={3}>{this.state.date.estado} {this.state.date.ciudad} {this.state.date.colonia}</Descriptions.Item>
                     </Descriptions>
                 </Card>

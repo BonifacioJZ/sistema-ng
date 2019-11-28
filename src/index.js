@@ -9,8 +9,10 @@ import {ApolloProvider} from '@apollo/react-hooks';
 import App from './global/App';
 import 'antd/dist/antd.css';
 import {BrowserRouter as Router} from 'react-router-dom';
+import { url } from './global/variables/os';
 
-const httplink = new createHttpLink({ uri:"http://localhost:8000/graphql/"}) 
+
+const httplink = new createHttpLink({ uri:url}) 
 
 const authLink = new ApolloLink((operation,forward)=>{
 

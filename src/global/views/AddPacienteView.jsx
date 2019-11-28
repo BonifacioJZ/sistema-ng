@@ -2,7 +2,7 @@ import React from 'react';
 import {Layout,Row,Col} from 'antd';
 import Head2 from '../components/Head2'
 import AddPaciente from './../components/Forms/AddPaciente';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import {useMutation} from '@apollo/react-hooks';
 import {ADD_PACIENTE} from './../Querys/Query'
 const {Header,Content} = Layout;
@@ -14,16 +14,21 @@ function AddPacienteView (props){
         }
         const [paciente] = useMutation(ADD_PACIENTE,{
             onCompleted(data){
-                
-                swal({
+                const id = data.createPaciente.pacienteUser.id
+                Swal.fire({
                     title:"Exito",
                     text:"El Paciente fue creado con exito",
-                    icon:"success"
+                    icon:"success",
+                    
+                }).then((result)=>{
+                    if(result.value){
+                        props.history.push(`/home/info-paciente/${id}`)
+                    }
                 })
             },
             onError(err){
                 console.error(err)
-                swal({
+                Swal.fire({
                     title:"Error",
                     text:"Hubo un error al insertar el Paciente",
                     icon:"error"

@@ -1,31 +1,61 @@
 import React, {Component} from 'react';
 import {Form, Input,InputNumber,Button,Select,Icon,DatePicker} from 'antd';
 import locale from 'antd/es/date-picker/locale/es_ES';
-class AddPaciente extends Component{
+import { url } from '../../variables/os';
+import reqwest from 'reqwest'
 
-    
+class UpdatePaciente extends Component{
+
+    state={
+        id:this.props.id,
+        paciente:[]
+    }
     handlerSubmit = (e) => { 
         e.preventDefault(); 
         this.props.form.validateFieldsAndScroll((err,values)=>{
             if(!err){ 
               
-                const value={
+                if(values.fecha){
+                    const value={
                     ...values,
-                    'date_picker': values['date-picker'].format('YYYY-MM-DD')
-                }
-               
-                let input={
-                    nombre:value.name,
-                    apellidos:value.last_name,
-                    birthday:value.date_picker,
-                    edad:value.age,
-                    telefono:value.phone,
-                    estado:value.state,
-                    ciudad:value.city,
-                    colonia:value.colonia
+                    'fecha': values['fecha'].format('YYYY-MM-DD')
+                    }
+                
+                    let input ={
+                        nombre:value.name,
+                        apellidos:value.last_name,
+                        birthday:value.fecha,
+                        edad:value.age,
+                        telefono:value.phone,
+                        estado:value.state,
+                        ciudad:value.city,
+                        colonia:value.colonia
 
+                    }
+                    console.info(input)
+                    this.props.mutation({variables:{id:this.state.id,input:input}})
+               
+                }else{
+                    const value ={
+                        ...values,
+                        'fecha':this.state.paciente.birthday
+                    }
+                    let input ={
+                        nombre:value.name,
+                        apellidos:value.last_name,
+                        birthday:value.fecha,
+                        edad:value.age,
+                        telefono:value.phone,
+                        estado:value.state,
+                        ciudad:value.city,
+                        colonia:value.colonia
+
+                    }
+                    console.info(input)
+                    this.props.mutation({variables:{id:this.state.id,input:input}})
                 }
-                this.props.mutation({variables:{input:input}})
+                
+                
             }
             else{
               
@@ -33,7 +63,48 @@ class AddPaciente extends Component{
         })
 
     }
-    
+     componentDidMount(){
+        this.fetchData(res=>{
+            this.setState({
+                paciente:res.data.patient
+            })
+        })
+       
+        
+    }
+    fetchData = callback =>{
+        const token = localStorage.getItem('token')
+        reqwest({
+            url,
+            method:'post',
+            type:"json",
+            data:{
+                query:`
+                    query{
+                        patient(id:${this.state.id}){
+                        nombre,
+                        apellidos,
+                        edad,
+                        telefono,
+                        birthday,
+                        ciudad,
+                        colonia,
+                        estado
+
+
+                        }
+                    }
+                `
+            },
+            headers:{
+                Authorization:`JWT ${token}`
+            },
+            success: res => {
+                callback(res);
+              },
+
+        })
+    }
     render(){
         
         const {getFieldDecorator} = this.props.form;
@@ -61,7 +132,8 @@ class AddPaciente extends Component{
             },
         };
         const config = {
-            rules: [{ type: 'object', required: true, message: 'Please select time!' }],
+            
+            rules: [{ type: 'object', required: false, message: 'Please select time!' }],
           };
        
         const prefixSelector = getFieldDecorator('prefix',{
@@ -76,6 +148,7 @@ class AddPaciente extends Component{
            <Form  layout="vertical" {...formItemLayout} onSubmit={this.handlerSubmit}>
                 <Form.Item label="Nombre">
                     {getFieldDecorator('name',{
+                        initialValue:this.state.paciente.nombre,
                         rules:[
                             {
                                 required: true,
@@ -89,6 +162,7 @@ class AddPaciente extends Component{
                 </Form.Item>
                 <Form.Item label="Apellidos">
                         {getFieldDecorator('last_name',{
+                            initialValue:this.state.paciente.apellidos,
                             rules:[
                                 {
                                     required:true,
@@ -100,13 +174,13 @@ class AddPaciente extends Component{
                         />)}
                 </Form.Item>
                 <Form.Item label="Fecha de nacimiento">
-                            {getFieldDecorator('date-picker',
+                            {getFieldDecorator('fecha',
                             config)(<DatePicker locale={locale}/>)}
                 </Form.Item>
                 <Form.Item label="Edad">
                 {getFieldDecorator('age', 
                 { 
-                    initialValue: 0,
+                    initialValue: this.state.paciente.edad,
                     rules:[
                         {required:true,message:"La Edad es Requerida"}
                     ] 
@@ -117,7 +191,8 @@ class AddPaciente extends Component{
                 </Form.Item>
                 <Form.Item label="Numero de Telefono">
                             {getFieldDecorator('phone',{
-                                
+                                initialValue:this.state.paciente.telefono,
+                               
                             })(<Input 
                             prefix={<Icon type="phone" style={{color:'rgba(0,0,0,.25)'}}/>}
                             placeholder="Telefono"
@@ -159,7 +234,7 @@ class AddPaciente extends Component{
                 </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
                             <Button type="primary" htmlType="submit">
-                                Register
+                                Actualizar
                             </Button>
                 </Form.Item>
            </Form>
@@ -167,4 +242,4 @@ class AddPaciente extends Component{
     };
 };
 
-export default AddPaciente = Form.create({name:'register'})(AddPaciente);
+export default UpdatePaciente = Form.create({name:'register'})(UpdatePaciente);

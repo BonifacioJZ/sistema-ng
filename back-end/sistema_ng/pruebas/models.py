@@ -5,15 +5,9 @@ class medicina(models.Model):
     nombre = models.CharField(max_length=100, blank=True, null=True)
     formula = models.CharField(max_length=100,blank=True, null=True)
     descripcion = models.TextField(blank=True, null=True)
+    stock = models.IntegerField(blank=True,null=True)
+    disponible  = models.BooleanField(blank=True,null=True)
 
-
-class expediente (models.Model):
-    peso = models.CharField(max_length=100, blank=True, null=True)
-    altura = models.CharField(max_length=100,blank=True, null=True)
-    pulso = models.CharField(max_length=100,blank=True, null=True)
-    respiracion = models.CharField(max_length=100,blank=True, null=True)
-    temperatura = models.CharField(max_length=100,blank=True, null=True)
-    medicinas = models.ManyToManyField(medicina)
 
 class paciente (models.Model):
     nombre = models.CharField(max_length=100, blank=True, null=True)
@@ -24,3 +18,13 @@ class paciente (models.Model):
     estado = models.CharField(max_length=100,blank=True, null=True)
     ciudad = models.CharField(max_length=100,blank=True, null=True)
     colonia = models.CharField(max_length=100,blank=True, null=True)
+
+class expediente (models.Model):
+    pulso = models.CharField(max_length=100,blank=True, null=True)
+    respiracion = models.CharField(max_length=100,blank=True, null=True)
+    temperatura = models.CharField(max_length=100,blank=True, null=True)
+    medicinas = models.ManyToManyField(medicina)
+    precion_s = models.CharField(max_length=3,blank=True,null=True)
+    precion_d = models.CharField(max_length=3,blank=True,null=True)
+    pacientes = models.ForeignKey(paciente, verbose_name=("pacientes") ,on_delete=models.CASCADE,blank=True,null=True)
+    date = models.DateField(auto_now=False, auto_now_add=True,blank=True,null=True)
