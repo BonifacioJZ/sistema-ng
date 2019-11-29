@@ -26,6 +26,7 @@ class MedicineInput(graphene.InputObjectType):
     descripcion = graphene.String()
     stock = graphene.Int()
     disponible = graphene.Boolean()
+    docis = graphene.String()
 
 class ExpedientInput(graphene.InputObjectType):
     pulso = graphene.String()

@@ -7,6 +7,7 @@ class medicina(models.Model):
     descripcion = models.TextField(blank=True, null=True)
     stock = models.IntegerField(blank=True,null=True)
     disponible  = models.BooleanField(blank=True,null=True)
+    docis = models.TextField(blank=True,null=True)
 
 
 class paciente (models.Model):
@@ -28,3 +29,10 @@ class expediente (models.Model):
     precion_d = models.CharField(max_length=3,blank=True,null=True)
     pacientes = models.ForeignKey(paciente, verbose_name=("pacientes") ,on_delete=models.CASCADE,blank=True,null=True)
     date = models.DateField(auto_now=False, auto_now_add=True,blank=True,null=True)
+
+class notesexpedient (models.Model):
+    note = models.TextField(blank=True, null = True)
+    expedientes = models.ForeignKey(expediente, verbose_name=("expedientes"), on_delete=models.CASCADE,blank=True,null=True)
+    fecha = models.DateField(auto_now=False, auto_now_add=True,blank=True,null=True)
+    hora = models.CharField(max_length=10,blank=True,null=True)
+

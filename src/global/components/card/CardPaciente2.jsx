@@ -2,7 +2,8 @@ import React from 'react';
 import reqwest from 'reqwest'
 import { Card, Descriptions, Row, Col, Button, Icon,List } from 'antd';
 import { url } from '../../variables/os'; 
-import CardExp from './CardExp';
+import IconText from '../simplecomponents/IconText';
+
 
 
 
@@ -97,7 +98,15 @@ class CardPaciente2 extends React.Component{
                         loading={this.state.loading}
                         dataSource={this.state.expedientes}
                         renderItem={item=>(
-                            <List.Item>
+                            <List.Item
+                                key={item.id}
+                                actions ={
+                                    [
+                                        <IconText  direccion="/home/info-expedient"  id={item.id} type="profile" color="#52c41a" theme="twoTone" />,
+                                        <IconText  type="edit" theme="twoTone"  color="#52c41a" id={item.id}/>,
+
+                                    ]
+                                }>
                                 <List.Item.Meta
                                     title={item.date}
                                 />

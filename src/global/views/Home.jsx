@@ -33,9 +33,6 @@ class Home extends Component {
                         <Option  img="/img/isolated-1188036_1920.png" alt="Medicos" title="Medicos"/>
                     </Col>
                     <Col lg={{span:8}} md={{span:12}} xs={{span:24}}>
-                        <Option img="/img/nurse-748186_1920.jpg" alt="Enfermeras"  title="Enfermeras"/>
-                    </Col>
-                    <Col lg={{span:8}} md={{span:12}} xs={{span:24}}>
                         <Option img="/img/checklist-3222079_1920.jpg" alt="Expedientes" title="Expedientes" />
                     </Col>
                 </Row>

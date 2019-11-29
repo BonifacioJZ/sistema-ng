@@ -5,10 +5,12 @@ import {url} from './../../variables/os';
 const {Option} = Select;
 
 const token  = localStorage.getItem('token')
-const children =[]
+var children2 =[]
 class AddExpediente extends React.Component{
 
-
+    state={
+        children:[]
+    }
      async componentDidMount(){
         const data = await axios({
             url,
@@ -27,14 +29,19 @@ class AddExpediente extends React.Component{
             }
             
         })
+        children2 =[]
         let date = []
         data.data.data.medicines? date = await data.data.data.medicines: date =[]
        
         
         for (let i=0;i<date.length;i++){
             let valor =`${date[i].id}#${date[i].nombre}`
-            children.push(<Option key={date[i].id} value={valor} label={date[i].nombre} >{date[i].nombre}</Option>)
+            children2.push(<Option key={date[i].id} value={valor} label={date[i].nombre} >{date[i].nombre}</Option>)
         }
+        this.setState({
+            children:children2
+        })
+        console.log(this.state.children)
         
     }
     handleSubmit = e => {
@@ -109,7 +116,7 @@ class AddExpediente extends React.Component{
                              mode="multiple"
                              style={{with:'100%'}} 
                              placeholder="Selecione una medicina"
-                             >{children}</Select>)}
+                             >{this.state.children}</Select>)}
                          </Form.Item>
                     </Col>
                 </Row>

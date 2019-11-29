@@ -40,7 +40,8 @@ class CreateMedicine(graphene.Mutation):
                 formula = input.formula,
                 descripcion = input.descripcion,
                 stock = input.stock, 
-                disponible = dinsponible
+                disponible = dinsponible,
+                docis = input.docis
             )
 
             medicina_instance.save()
