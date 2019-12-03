@@ -14,6 +14,16 @@ mutation VerifyToken($token:String!){
   }
 }
 `;
+
+const ADD_NOTEE = gql`
+mutation CreateNote($input:NotaInput!){
+  createNote(input:$input){
+    ok,
+    note{
+      id
+    }
+  }
+}`
 const ADD_PACIENTE = gql `
 mutation CreatePaciete($input:PacienteInput!){
   createPaciente(input:$input){
@@ -87,6 +97,8 @@ export {
     PRUEBA_TOKEN,
     CREAT_EXPEDIENTE,
     UPDATE_PATIENT,
+    ADD_NOTEE ,
+
     //Query
     ADD_PACIENTE,
     PACIENTES_DATA

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from graphene_django.types import DjangoObjectType, ObjectType
 from django.db.models import Count 
 
-from .models import expediente, medicina, paciente
+from .models import expediente, medicina, paciente,notesexpedient
 from .pagination import get_paginator
 
 
@@ -23,6 +23,11 @@ class ExpedientType(DjangoObjectType):
 class MedicinaType(DjangoObjectType):
     class Meta:
         model = medicina
+
+class NoteEType(DjangoObjectType):
+    class Meta:
+        model = notesexpedient
+
 
 class PacientePaginatedType(graphene.ObjectType):
     page = graphene.Int()

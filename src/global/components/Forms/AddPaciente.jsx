@@ -159,7 +159,7 @@ class AddPaciente extends Component{
                 </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
                             <Button type="primary" htmlType="submit">
-                                Register
+                                Registrar
                             </Button>
                 </Form.Item>
            </Form>

@@ -64,7 +64,7 @@ class AddExpediente extends React.Component{
                   paciente:[{id:this.props.id}]
               }
               this.props.mutation({variables:{input:variables}})
-              console.log(variables)
+             
           }
         });
       };

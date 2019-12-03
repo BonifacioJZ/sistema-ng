@@ -1,7 +1,8 @@
 import React from 'react';
 import { url } from '../../variables/os';
 import reqwest from 'reqwest'
-import { Card, Descriptions, Alert, List } from 'antd';
+import {Link} from 'react-router-dom'
+import { Card, Descriptions, Alert, List, Button, Row, Col } from 'antd';
 
 const token = localStorage.getItem('token')
 class CardExp extends React.Component{
@@ -25,8 +26,9 @@ class CardExp extends React.Component{
 
     componentDidMount(){
         this.fetchData(res=>{
-            let nombre = `${res.data.expedient.pacientes.nombre} ${res.data.expedient.pacientes.apellidos}`;
             console.log(res)
+            let nombre = `${res.data.expedient.pacientes.nombre} ${res.data.expedient.pacientes.apellidos}`;
+            
            
             this.setState({
                 nombre,
@@ -159,6 +161,12 @@ class CardExp extends React.Component{
                         )}
                     />
                 </Card>
+                <br/>
+                <Row justify="center" >
+                            <Col offset={10} >
+                                <Link to={`/home/notes-expedient/${this.state.id}`} ><Button>Notas</Button></Link>
+                            </Col>
+                </Row>
             </div>
         )
     }

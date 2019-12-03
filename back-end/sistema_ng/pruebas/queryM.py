@@ -1,11 +1,42 @@
 import graphene
 from .inputs import (UserInput,LoginInput,PacienteInput
-,MedicineInput,ExpedientInput)
+,MedicineInput,ExpedientInput,NotaInput)
 from .types import (UserType,PacienteType,MedicinaType,
-ExpedientType)
+ExpedientType,NoteEType)
+import time
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from .models import paciente, medicina, expediente
+from .models import paciente, medicina, expediente,notesexpedient
+
+
+class CreateNote (graphene.Mutation):
+    class Arguments:
+        input = NotaInput(required=True)
+    ok = graphene.Boolean()
+    note = graphene.Field(NoteEType)
+    @staticmethod
+    def mutate(root,info,input=None):
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not logged in!')
+        else:
+            if input is not None:
+                ok = True 
+                for note_instance in input.expediente:
+                    expedient = expediente.objects.get(pk=note_instance.id)
+
+                    if expedient is None:
+                        return CreateNote(ok = False, note=None )
+                note_in = notesexpedient(
+                    titulo = input.titulo,
+                    note = input.nota,
+                    expedientes = expedient,
+                    hora = time.strftime("%H:%M:%S")
+                )
+                note_in.save()
+                return CreateNote(ok ,note=note_in )
+            return CreateNote(ok = False,note=None)
+
 
 class CreateUser(graphene.Mutation):
     class Arguments:
@@ -29,11 +60,11 @@ class CreateMedicine(graphene.Mutation):
 
     @staticmethod
     def mutate(root,info,input=None):
-        print (input)
+      
         if input is not None:
             ok = True
             dinsponible = False,
-            if input.srock != 0:
+            if input.stock != 0:
                 dinsponible = True
             medicina_instance = medicina(
                 nombre = input.nombre,

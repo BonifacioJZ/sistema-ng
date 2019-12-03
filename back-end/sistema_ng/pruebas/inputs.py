@@ -29,6 +29,7 @@ class MedicineInput(graphene.InputObjectType):
     docis = graphene.String()
 
 class ExpedientInput(graphene.InputObjectType):
+    id = graphene.ID()
     pulso = graphene.String()
     respiracion = graphene.String()
     temperatura = graphene.String()
@@ -36,4 +37,10 @@ class ExpedientInput(graphene.InputObjectType):
     precion_s= graphene.String()
     precion_d= graphene.String()
     paciente = graphene.List(PacienteInput)
+
+class NotaInput(graphene.InputObjectType):
+    titulo = graphene.String()
+    nota = graphene.String()
+    expediente = graphene.List(ExpedientInput)
+
 

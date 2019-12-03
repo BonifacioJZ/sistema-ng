@@ -10,6 +10,9 @@ import Error404 from './Error404';
 import UpdatePacienteView from './UpdatePacienteview';
 import InfoPaciente from './InfoPaciente';
 import InfoExpediente from './InfoExpediente';
+import FormNotesView from './FomrNotesView';
+import NotasE from './NotasE';
+
 
 const {Sider,Footer } = Layout;
 const {SubMenu} = Menu;
@@ -74,6 +77,8 @@ function Nav() {
                 <ProtectedRoutes exact path="/home/update-paciente/:id" component={UpdatePacienteView} />
                 <ProtectedRoutes exact path="/home/info-paciente/:id" component={InfoPaciente} />
                 <ProtectedRoutes exact path="/home/info-expedient/:id" component={InfoExpediente} />
+                <ProtectedRoutes exact path="/home/notes-expedient/:id" component={NotasE} />
+                <ProtectedRoutes exact path="/home/create-note-expedient/:id" component={FormNotesView} />
                 <Route path="/home/*" component={Error404} />
            </Case>
           <Footer style={{ textAlign: 'center' }}>Bonifacio Juarez Ceja ©</Footer>
