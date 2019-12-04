@@ -29,6 +29,8 @@ class expediente (models.Model):
     precion_d = models.CharField(max_length=3,blank=True,null=True)
     pacientes = models.ForeignKey(paciente, verbose_name=("pacientes") ,on_delete=models.CASCADE,blank=True,null=True)
     date = models.DateField(auto_now=False, auto_now_add=True,blank=True,null=True)
+    actualizacion = models.DateField(blank=True,null=True ,auto_now=True, auto_now_add=False)
+    hoara = models.CharField(max_length=10,blank=True,null=True)
 
 class notesexpedient (models.Model):
     titulo = models.CharField(max_length=100,blank=True,null=True)

@@ -1,12 +1,52 @@
 import graphene
 from .inputs import (UserInput,LoginInput,PacienteInput
-,MedicineInput,ExpedientInput,NotaInput)
+,MedicineInput,ExpedientInput,NotaInput,UExpedientInput)
 from .types import (UserType,PacienteType,MedicinaType,
 ExpedientType,NoteEType)
 import time
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from .models import paciente, medicina, expediente,notesexpedient
+
+
+class UpdateExpedient(graphene.Mutation):
+    class Arguments:
+        id = graphene.Int(required=True)
+        input = UExpedientInput(required=True)
+    ok = graphene.Boolean()
+    expedient = graphene.Field(ExpedientType)
+    @staticmethod
+    def mutate(root,info,id,input=None):
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not logged in!')
+        else:
+            if input is not None:
+               
+                medicines=[]
+                for medicina_input in input.medicinas:
+                    medicin  = medicina.objects.get(pk=medicina_input.id)
+
+                    if medicin is None:
+                        return UpdateExpedient(ok = false,expedient=None)
+                    medicines.append(medicin)
+                expedient= expediente.objects.get(pk=id)
+                if expedient is not None:
+                    ok = True
+                   
+                    expedient.pulso = input.pulso
+                    expedient.respiracion = input.respiracion
+                    expedient.temperatura = input.temperatura
+                    expedient.precion_d = input.precion_d
+                    expedient.precion_s = input.precion_s
+                    expedient.medicinas.set(medicines)
+                    expedient.save()
+
+                    return UpdateExpedient(ok,expedient=expedient)
+
+                return UpdateExpedient(ok =False,expedient=None)    
+                    
+            return UpdateExpedient(ok = False,expedient=None)
 
 
 class CreateNote (graphene.Mutation):

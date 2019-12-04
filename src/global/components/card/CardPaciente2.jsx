@@ -97,13 +97,21 @@ class CardPaciente2 extends React.Component{
                     <List
                         loading={this.state.loading}
                         dataSource={this.state.expedientes}
+                        size="large"
+                        pagination={{
+                            onChange: page => {
+                               
+                            },
+                            pageSize: 5,
+                        }}
                         renderItem={item=>(
                             <List.Item
                                 key={item.id}
                                 actions ={
                                     [
                                         <IconText  direccion="/home/info-expedient"  id={item.id} type="profile" color="#52c41a" theme="twoTone" />,
-                                        <IconText  type="edit" theme="twoTone"  color="#52c41a" id={item.id}/>,
+                                        <IconText direccion="/home/edit-expedient" id={item.id} type="edit" theme="twoTone"  color="#52c41a" />,
+                                        <IconText  id={item.id} type="delete" theme="twoTone"  color="#f5222d" />
 
                                     ]
                                 }>

@@ -64,7 +64,7 @@ class CardNotesE extends React.Component{
                                 key={item.id}
                                 actions ={
                                     [
-                                        <IconText  direccion="/home/info-expedient"  id={item.id} type="profile" color="#52c41a" theme="twoTone" />,
+                                        <IconText   id={item.id} type="profile" color="#52c41a" theme="twoTone" />,
                                         <IconText  type="edit" theme="twoTone"  color="#52c41a" id={item.id}/>,
 
                                     ]

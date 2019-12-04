@@ -2,14 +2,15 @@ import React from 'react';
 import { url } from '../../variables/os';
 import reqwest from 'reqwest'
 import {Link} from 'react-router-dom'
-import { Card, Descriptions, Alert, List, Button, Row, Col } from 'antd';
+import { Card, Descriptions, Alert, List, Button, Row, Col, Icon,Modal} from 'antd';
+
 
 const token = localStorage.getItem('token')
 class CardExp extends React.Component{
+
     state ={
         id:this.props.id,
         paciente:[],
-        expediente:[],
         medicinas:[],
         pulso:"",
         temperatura:"",
@@ -21,12 +22,36 @@ class CardExp extends React.Component{
         precioD:"",
         precioS:"",
         fecha:"",
-        loading:true
+        loading:true,
+        color :"",
+        precion:"",
+        visible:false,
     }
+
+    showModal = ()=>{
+        this.setState({
+            visible:true
+        });
+    };
+    handlerOk = e =>{
+        
+        this.setState({
+            visible:false
+        })
+    }
+    
+    handlerCancel= e =>{
+       
+        this.setState({
+                visible:false,
+               
+        });
+    };
+    
 
     componentDidMount(){
         this.fetchData(res=>{
-            console.log(res)
+            
             let nombre = `${res.data.expedient.pacientes.nombre} ${res.data.expedient.pacientes.apellidos}`;
             
            
@@ -43,11 +68,53 @@ class CardExp extends React.Component{
                 precioD:this.precionD(res.data.expedient.precionD),
                 precioS:this.precionS(res.data.expedient.precionS),
                 fecha:res.data.expedient.date,
-                loading:false
+                loading:false,
+                precion:this.grado(res.data.expedient.precionS,res.data.expedient.precionD)
             })
-            console.log(this.state)
+            
 
         })
+    }
+    grado =(precions,preciond)=>{
+        var precionS = parseInt(precions)
+        var precionD = parseInt(preciond)
+        if((precionS>= 80 &&precionS<=120) && (precionD>=60&&precionD<=80)  ){
+            this.setState({
+                color:"success"
+            })
+            return "normal"
+        }
+        if((precionS>=121 && precionS<=139)||(precionD>=81 &&precionD<=89 )){
+            this.setState({
+                color:"warning"
+            })
+            return "Prehipertensión"
+        }
+        if((precionS>=140 && precionS<=159)||(precionD>=90 &&precionD<=99 )){
+            this.setState({
+                color:"warning"
+            })
+            return "HTA 1"
+        }
+        if((precionS>=160 && precionS<=179)||(precionD>=100 &&precionD<=109 )){
+            this.setState({
+                color:"warning"
+            })
+            return "HTA 2"
+        }
+        if((precionS>=180 )||(precionD>=110 )){
+            this.setState({
+                color:"error"
+            })
+            return "Crisis hipertensiva"
+        }
+        if((precionS<80 )||(precionD<60 )){
+            this.setState({
+                color:"error"
+            })
+            return "Hipotenión"
+        }
+
     }
  precionD =(numero)=>{
      var precio = parseInt(numero)
@@ -108,7 +175,8 @@ class CardExp extends React.Component{
                        medicinas{
                            id,
                            nombre,
-                           formula
+                           formula,
+                           docis
                        },
                        date
                        precionS,
@@ -142,7 +210,7 @@ class CardExp extends React.Component{
                         <Descriptions.Item label="Respiracion" > {this.state.respiracion}</Descriptions.Item>
                         <Descriptions.Item label="Precion Sistólica"><Alert message={this.state.precionS} type={this.state.precioS} showIcon /> </Descriptions.Item>
                         <Descriptions.Item label="Precion Diastolica" ><Alert message={this.state.precionD} type={this.state.precioD}  showIcon /></Descriptions.Item>
-                        
+                        <Descriptions.Item label="Precion" ><Alert message={this.state.precion} type={this.state.color} showIcon /></Descriptions.Item>
                     </Descriptions>
                 </Card>
                 <br/>
@@ -152,11 +220,25 @@ class CardExp extends React.Component{
                         dataSource={this.state.medicinas}
                         renderItem={item=>(
                             <List.Item
-                                key={item.id}>
+                                key={item.id}
+                                actions ={
+                                    [
+                                        
+                                        <Button onClick={this.showModal} ><Icon  type="profile" theme="twoTone" twoToneColor="#52c41a" /></Button>,
+
+                                    ]
+                                }>
                             <List.Item.Meta 
                                 title={item.nombre}
                                 description={item.formula}
                             />
+                                <Modal
+                                    title="Docis"
+                                    visible={this.state.visible}
+                                    onOk={this.handlerOk}
+                                    onCancel={this.handlerCancel}>
+                                    <p>{item.docis}</p>
+                                </Modal>
                             </List.Item>
                         )}
                     />

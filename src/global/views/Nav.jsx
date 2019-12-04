@@ -12,6 +12,7 @@ import InfoPaciente from './InfoPaciente';
 import InfoExpediente from './InfoExpediente';
 import FormNotesView from './FomrNotesView';
 import NotasE from './NotasE';
+import EditExpedient from './EditExpedient';
 
 
 const {Sider,Footer } = Layout;
@@ -71,14 +72,19 @@ function Nav() {
          <Layout className="layout">
            <Case>
                 <ProtectedRoutes exact path="/home" component={Home}/>
+                {/*Rutas de Pacientes*/}
                 <ProtectedRoutes exact path="/home/add-paciente" component={AddPacienteView}/>
                 <ProtectedRoutes exact path="/home/listpaciente" component={ListPaciente} />
-                <ProtectedRoutes exact path="/home/expedient-paciente/:id" component={ExpedientePaciente} />
                 <ProtectedRoutes exact path="/home/update-paciente/:id" component={UpdatePacienteView} />
                 <ProtectedRoutes exact path="/home/info-paciente/:id" component={InfoPaciente} />
+                {/* Rutas Expedientes*/}
+                <ProtectedRoutes exact path="/home/expedient-paciente/:id" component={ExpedientePaciente} />
                 <ProtectedRoutes exact path="/home/info-expedient/:id" component={InfoExpediente} />
+                <ProtectedRoutes exact path="/home/edit-expedient/:id" component={EditExpedient} />
+                {/* Rutas de Notas */}
                 <ProtectedRoutes exact path="/home/notes-expedient/:id" component={NotasE} />
                 <ProtectedRoutes exact path="/home/create-note-expedient/:id" component={FormNotesView} />
+                
                 <Route path="/home/*" component={Error404} />
            </Case>
           <Footer style={{ textAlign: 'center' }}>Bonifacio Juarez Ceja ©</Footer>

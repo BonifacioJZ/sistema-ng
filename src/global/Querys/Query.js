@@ -47,7 +47,16 @@ mutation UpdatePaciente($id:Int!,$input:PacienteInput!){
   }
 }
 `;
-
+const UPDATE_EXPEDIENTE=gql`
+mutation UpdateExpedient($id:Int!,$input:UExpedientInput!){
+  updateExpediente(id:$id,input:$input){
+    ok,
+    expedient{
+      id
+    }
+  }
+}
+`;
 const CREAT_EXPEDIENTE = gql`
 mutation CreateExpediente($input:ExpedientInput!){
   createExpediente(input:$input){
@@ -98,6 +107,7 @@ export {
     CREAT_EXPEDIENTE,
     UPDATE_PATIENT,
     ADD_NOTEE ,
+    UPDATE_EXPEDIENTE,
 
     //Query
     ADD_PACIENTE,
