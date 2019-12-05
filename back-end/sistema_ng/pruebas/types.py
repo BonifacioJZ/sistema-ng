@@ -48,7 +48,18 @@ class Query(ObjectType):
     medicines = graphene.List(MedicinaType)
     medicina = graphene.Field(MedicinaType, id= graphene.ID())
     expedientp = graphene.List(ExpedientType,idpaciente= graphene.ID())
+    noteexpedient = graphene.Field(NoteEType,id=graphene.ID())
 
+    def resolve_noteexpedient(self,info,**kwargs):
+        user = info.context.user
+        id = kwargs.get('id')
+        if user.is_anonymous:
+            raise Exception('Not logged in!')
+        else:
+            if id is None:
+                return None
+            return notesexpedient.objects.get(pk=id)
+        return None
 
     def resolve_expedientp(self,info,**kwargs):
         user = info.context.user

@@ -1,6 +1,7 @@
 import graphene
 from .inputs import (UserInput,LoginInput,PacienteInput
-,MedicineInput,ExpedientInput,NotaInput,UExpedientInput)
+,MedicineInput,ExpedientInput,NotaInput,UExpedientInput,
+NoteInput)
 from .types import (UserType,PacienteType,MedicinaType,
 ExpedientType,NoteEType)
 import time
@@ -8,6 +9,28 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from .models import paciente, medicina, expediente,notesexpedient
 
+class UpdateNoteExpedient(graphene.Mutation):
+    class Arguments:
+        id = graphene.Int(required=True)
+        input = NoteInput(required=True)
+    ok = graphene.Boolean()
+    note = graphene.Field(NoteEType)
+    @staticmethod
+    def mutate(root,info,id,input=None):
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not logged in!')
+        else:
+            if input is not None:
+                note_instance = notesexpedient.objects.get(pk=id)
+                if note_instance is not None:
+                    ok = True
+                    note_instance.titulo=input.titulo
+                    note_instance.note = input.nota
+                    note_instance.save()
+                    return UpdateNoteExpedient(ok,note=note_instance)
+                return UpdateNoteExpedient(ok=False, note=None)
+            return UpdateNoteExpedient(ok=False,note=None)
 
 class UpdateExpedient(graphene.Mutation):
     class Arguments:

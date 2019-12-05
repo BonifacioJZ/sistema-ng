@@ -53,4 +53,8 @@ class NotaInput(graphene.InputObjectType):
     nota = graphene.String()
     expediente = graphene.List(ExpedientInput)
 
+class NoteInput(graphene.InputObjectType):
+    titulo = graphene.String()
+    nota = graphene.String()
+
 

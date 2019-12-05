@@ -67,6 +67,15 @@ mutation CreateExpediente($input:ExpedientInput!){
   }
 }
 `;
+const UPDATE_NOTE_EXPEDIENT= gql`
+mutation UpdateNoteExpedient($id:Int!,$input:NoteInput!){
+  updateNoteExpedient(id:$id,input:$input){
+    ok,
+    note{
+      id
+    }
+  }
+}`;
 
 //Query's Consultas
 //Consulta de los datos
@@ -108,6 +117,7 @@ export {
     UPDATE_PATIENT,
     ADD_NOTEE ,
     UPDATE_EXPEDIENTE,
+    UPDATE_NOTE_EXPEDIENT,
 
     //Query
     ADD_PACIENTE,

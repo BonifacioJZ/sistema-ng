@@ -1,29 +1,35 @@
 import React from 'react'
-import { List,Card, Row, Col, Button } from 'antd';
+import { List,Card, Row, Col, Button, Icon } from 'antd';
 import {Link} from 'react-router-dom'
 import { url } from '../../variables/os';
 import  reqwest from 'reqwest'
 import IconText from '../simplecomponents/IconText';
+import Swal from 'sweetalert2'
 
 const token = localStorage.getItem('token')
 class CardNotesE extends React.Component{
 
-    state = {
-        data:[],
-        loading:true
-    }
+   constructor(props){
+        super(props)
+        this.delete = this.delete.bind(this)
+        this.state = {
+            data:[],
+            loading:true,
+            ok:false
+        }
+   }
     
     componentDidMount(){
         this.fetchData(res=>{
             this.setState({
                 data:res.data.expedient.notesexpedientSet,
-                loading:false
+                loading:false,
             })
             
 
         })
     }
-
+    
     fetchData= callback=>{
         reqwest({
             url,
@@ -50,8 +56,25 @@ class CardNotesE extends React.Component{
 
         })
     }
-  
+    
+    delete =(id)=>{
+        console.log(id)
+        if(id){
+            Swal.fire({
+                title:"Estas Seguro de Eliminar esta Nota",
+                text: "Esta decicion no es Reversible",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#52c41a',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si eliminar'
+            }).then((result)=>{
+                result.value?console.log(result):console.log("No Funciona")
+            })
+        }
+    }
     render(){
+        
     return(
         <div>
             
@@ -64,8 +87,9 @@ class CardNotesE extends React.Component{
                                 key={item.id}
                                 actions ={
                                     [
-                                        <IconText   id={item.id} type="profile" color="#52c41a" theme="twoTone" />,
-                                        <IconText  type="edit" theme="twoTone"  color="#52c41a" id={item.id}/>,
+                                        <IconText  direccion="/home/note-expedient" id={item.id} type="profile" color="#52c41a" theme="twoTone" />,
+                                        <IconText  direccion="/home/note-expedient-edit" type="edit" theme="twoTone"  color="#52c41a" id={item.id}/>,
+                                        <Button onClick={this.delete.bind(this,item.id)}><Icon type="delete" theme="twoTone" twoToneColor="#ff4d4f" /></Button>
 
                                     ]
                                 }>
