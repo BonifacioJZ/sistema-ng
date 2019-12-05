@@ -18,7 +18,7 @@ function EditExpedient(props){
         onCompleted(data){
             Swal.fire({
                 title:"Exito",
-                text:"Se a Actualizado el Paciente Exitosamente",
+                text:"Se a Actualizado el Expediente Exitosamente",
                 icon:"success"
             }).then((result)=>{
               if(result.value){

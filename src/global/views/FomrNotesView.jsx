@@ -5,7 +5,7 @@ import Head2 from '../components/Head2';
 import FormNoteE from '../components/Forms/FormNoteE';
 import { ADD_NOTEE } from '../Querys/Query';
 import { useMutation } from '@apollo/react-hooks';
-
+import Swal from 'sweetalert2'
 
 const {Header,Content}  = Layout
 
@@ -14,10 +14,22 @@ function FormNotesView(props){
     const [notes] = useMutation(ADD_NOTEE,
         {
             onCompleted(data){
-                console.log(data)
+                Swal.fire({
+                    title:"Exito",
+                    text:"Se a Creado la Nota Exitosa mente",
+                    icon:"success"
+                }).then((result)=>{
+                  if(result.value){
+                      props.history.push(`/home/notes-expedient/${id}`)
+                  }
+                })
             },
             onError(err){
-                console.error(err)
+                Swal.fire({
+                    title:"Error",
+                    text:"Ocurrio un error al Crear los datos Por Favor Revise los datos o Compruebe su Conexion",
+                    icon:"warning"
+                })
             }
         })
     var logout = ()=>{

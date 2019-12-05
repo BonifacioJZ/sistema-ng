@@ -69,7 +69,7 @@ class CardNotesE extends React.Component{
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Si eliminar'
             }).then((result)=>{
-                result.value?console.log(result):console.log("No Funciona")
+                result.value?this.props.mutation({variables:{id:id}}):console.log("No Funciona")
             })
         }
     }
@@ -82,6 +82,13 @@ class CardNotesE extends React.Component{
                 <List
                     loading={this.state.loading}
                     dataSource={this.state.data}
+                    size="large"
+                        pagination={{
+                            onChange: page => {
+                               
+                            },
+                            pageSize: 10,
+                        }}
                     renderItem={item=>(
                             <List.Item
                                 key={item.id}

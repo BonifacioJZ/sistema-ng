@@ -218,6 +218,13 @@ class CardExp extends React.Component{
                     <List 
                         loading={this.state.loading}
                         dataSource={this.state.medicinas}
+                        size="large"
+                        pagination={{
+                            onChange: page => {
+                               
+                            },
+                            pageSize: 5,
+                        }}
                         renderItem={item=>(
                             <List.Item
                                 key={item.id}

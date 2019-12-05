@@ -9,6 +9,25 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from .models import paciente, medicina, expediente,notesexpedient
 
+class DeleteNoteExpedient(graphene.Mutation):
+    class Arguments:
+        id = graphene.Int(required=True)
+    ok= graphene.Boolean()
+    @staticmethod
+    def mutate(root,info,id):
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not logged in!')
+        else:
+            if id is not None:
+                note_instance = notesexpedient.objects.get(pk=id)
+                if note_instance is not None:
+                    ok = True
+                    note_instance.delete()
+                    return DeleteNoteExpedient(ok)
+                raise Exception('No Note Exist')
+            raise Exception('No id')
+
 class UpdateNoteExpedient(graphene.Mutation):
     class Arguments:
         id = graphene.Int(required=True)

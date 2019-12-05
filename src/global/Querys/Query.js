@@ -76,6 +76,12 @@ mutation UpdateNoteExpedient($id:Int!,$input:NoteInput!){
     }
   }
 }`;
+const DELETE_NOTE_EXPEDIENT=gql`
+mutation DeleteNoteExpedient($id:Int!){
+  deleteNoteExpedient(id:$id){
+    ok
+  }
+}`
 
 //Query's Consultas
 //Consulta de los datos
@@ -109,6 +115,7 @@ const PRUEBA_TOKEN = gql `
 `;
 
 export {
+
     //Mutation
     USER_LOGIN,
     VERIFY_TOKEN,
@@ -121,5 +128,7 @@ export {
 
     //Query
     ADD_PACIENTE,
-    PACIENTES_DATA
+    PACIENTES_DATA,
+    //DeleteQuery's
+    DELETE_NOTE_EXPEDIENT,
 }
