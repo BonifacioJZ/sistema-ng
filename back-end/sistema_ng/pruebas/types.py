@@ -106,6 +106,7 @@ class Query(ObjectType):
         if id is not None:
             return paciente.objects.get(pk=id)
         return None        
+
     def resolve_expedient(self,info,**kwargs):
         id = kwargs.get('id')
 
@@ -120,5 +121,3 @@ class Query(ObjectType):
             return medicina.objects.get(pk=id)
         return None
 
-
-   
