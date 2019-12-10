@@ -7,6 +7,7 @@ class medicina(models.Model):
     descripcion = models.TextField(blank=True, null=True)
     stock = models.IntegerField(blank=True,null=True)
     disponible  = models.BooleanField(blank=True,null=True)
+    laboratorio = models.CharField(blank=True,null=True , max_length=20)
     docis = models.TextField(verbose_name=("Docis Recomendada"),blank=True,null=True)
 
 

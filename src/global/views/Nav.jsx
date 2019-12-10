@@ -15,6 +15,7 @@ import NotasE from './NotasE';
 import EditExpedient from './EditExpedient';
 import NoteEView from './NoteEView';
 import EditNoteEView from './EditNoteEView';
+import MedicineView from './MedicineView';
 
 
 const {Sider,Footer } = Layout;
@@ -88,6 +89,8 @@ function Nav() {
                 <ProtectedRoutes exact path="/home/create-note-expedient/:id" component={FormNotesView} />
                 <ProtectedRoutes exact path="/home/note-expedient/:id" component={NoteEView} />
                 <ProtectedRoutes exact path="/home/note-expedient-edit/:id" component={EditNoteEView} />
+                {/* Rutas de Medicianas */}
+                <ProtectedRoutes exact path="/home/medicine" component={MedicineView} />
                 
                 <Route path="/home/*" component={Error404} />
            </Case>
