@@ -3,7 +3,7 @@ import reqwest from 'reqwest'
 import { Card, Descriptions, Row, Col, Button, Icon,List } from 'antd';
 import { url } from '../../variables/os'; 
 import IconText from '../simplecomponents/IconText';
-
+import Swal from 'sweetalert2'
 
 
 
@@ -14,6 +14,7 @@ class CardPaciente2 extends React.Component{
 
     constructor(props){
         super(props);
+        this.delete = this.delete.bind(this)
         this.state={
             id:props.id,
             date:[],
@@ -75,6 +76,22 @@ class CardPaciente2 extends React.Component{
 
         })
     }
+    delete=(id)=>{
+        if(id){
+            Swal.fire({
+                title:"Estas Seguro de Eliminar el Expediente",
+                text: "Esta decicion no es Reversible",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#52c41a',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si eliminar'
+            }).then((result)=>{
+                result.value?this.props.mutation({variables:{id:id}}):console.log("No Funciona")
+            })
+        }
+        
+    }
     render(){
         return(
             <div>
@@ -111,7 +128,7 @@ class CardPaciente2 extends React.Component{
                                     [
                                         <IconText  direccion="/home/info-expedient"  id={item.id} type="profile" color="#52c41a" theme="twoTone" />,
                                         <IconText direccion="/home/edit-expedient" id={item.id} type="edit" theme="twoTone"  color="#52c41a" />,
-                                        <IconText  id={item.id} type="delete" theme="twoTone"  color="#f5222d" />
+                                        <Button onClick={this.delete.bind(this,item.id)} > <Icon type="delete" theme="twoTone" twoToneColor="#f5222d" /> </Button>,
 
                                     ]
                                 }>

@@ -58,7 +58,7 @@ class CardNotesE extends React.Component{
     }
     
     delete =(id)=>{
-        console.log(id)
+        
         if(id){
             Swal.fire({
                 title:"Estas Seguro de Eliminar esta Nota",

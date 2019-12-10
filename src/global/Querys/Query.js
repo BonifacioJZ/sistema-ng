@@ -82,6 +82,12 @@ mutation DeleteNoteExpedient($id:Int!){
     ok
   }
 }`
+const DELETE_EXPEDIENT=gql`
+mutation DeleteExpedient($id:Int!){
+  deleteExpedient(id:$id){
+    ok
+  }
+}`
 
 //Query's Consultas
 //Consulta de los datos
@@ -125,7 +131,7 @@ export {
     ADD_NOTEE ,
     UPDATE_EXPEDIENTE,
     UPDATE_NOTE_EXPEDIENT,
-
+    DELETE_EXPEDIENT,
     //Query
     ADD_PACIENTE,
     PACIENTES_DATA,
