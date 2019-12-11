@@ -45,7 +45,8 @@ class FormNoteE extends Component{
                 <Form.Item  label="Nota" >
                     {getFieldDecorator('note',{
                         setFieldsValue:value,
-                        rules:[{required:true}]
+                        rules:[{required:SVGComponentTransferFunctionElement,
+                            message:"Se requiere la Nota"}]
 
                     })(<Input.TextArea 
                          onChange={this.onChange}

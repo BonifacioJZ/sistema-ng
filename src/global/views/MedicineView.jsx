@@ -2,6 +2,7 @@ import React from 'react'
 
 import {Layout} from 'antd';
 import Head2 from './../components/Head2';
+import AddMedicine from '../components/Forms/AddMedicine';
 
 const {Header,Content} = Layout;
 
@@ -17,7 +18,7 @@ const MedicineView = (props)=>{
             </Header>
             <Content style={{ margin: '24px 16px 0' }}>
                 <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                    
+                    <AddMedicine/>
                 </div>
             </Content>
         </div>
