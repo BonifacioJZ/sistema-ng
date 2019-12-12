@@ -14,6 +14,7 @@ class medicina(models.Model):
 class paciente (models.Model):
     nombre = models.CharField(max_length=100, blank=True, null=True)
     apellidos = models.CharField(max_length=100,blank=True, null=True)
+    curp = models.CharField( max_length=18,blank=True,null=True)
     birthday = models.CharField(max_length=100,blank=True, null=True)
     edad = models.IntegerField(blank=True, null=True)
     telefono = models.CharField(max_length=13,blank=True, null=True)

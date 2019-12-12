@@ -28,14 +28,14 @@ class CardPaciente2 extends React.Component{
         this.fetchData(res=>{
             let date = res.data.patient
             const nombre= `${date.nombre} ${date.apellidos}` 
-            console.log(nombre)
+            
             this.setState({
                 nombre:nombre.toUpperCase(),
                 date,
                 expedientes:date.expedienteSet,
                 loading:false
             })
-            console.log(this.state.expedientes)
+           
         })
         // 
         

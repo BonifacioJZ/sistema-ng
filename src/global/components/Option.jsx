@@ -5,7 +5,8 @@ const {Meta} = Card
 class Option extends Component{
     state = {
         visible:false,
-        url:`/home/${this.props.ruta}`
+        url:`/home/${this.props.ruta}`,
+        url2:`/home/${this.props.ruta2}`
     };
     showModal = ()=>{
         this.setState({
@@ -39,7 +40,7 @@ class Option extends Component{
                 }
                 actions={[
                     <Link to={this.state.url}><Icon type="user-add"   key="setting"/></Link>,
-                    <Icon type="edit" key="edit"/>,
+                    <Link to={this.state.url2}><Icon type="edit" key="edit"/></Link>,
                     <Icon type="info-circle" onClick={this.showModal} key="ellipsis"/>
                 ]}>
                 <Meta

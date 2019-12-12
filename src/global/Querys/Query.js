@@ -88,7 +88,15 @@ mutation DeleteExpedient($id:Int!){
     ok
   }
 }`
-
+const ADD_MEDICINE = gql`
+mutation CreateMedicine($input:MedicineInput!){
+  createMedicine(input:$input){
+    ok,
+    medicine{
+      id
+    }
+  }
+}`
 //Query's Consultas
 //Consulta de los datos
 
@@ -131,10 +139,11 @@ export {
     ADD_NOTEE ,
     UPDATE_EXPEDIENTE,
     UPDATE_NOTE_EXPEDIENT,
-    DELETE_EXPEDIENT,
+    ADD_MEDICINE,
     //Query
     ADD_PACIENTE,
     PACIENTES_DATA,
     //DeleteQuery's
     DELETE_NOTE_EXPEDIENT,
+    DELETE_EXPEDIENT,
 }

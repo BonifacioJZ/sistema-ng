@@ -16,6 +16,7 @@ import EditExpedient from './EditExpedient';
 import NoteEView from './NoteEView';
 import EditNoteEView from './EditNoteEView';
 import MedicineView from './MedicineView';
+import Medicineslist from './Medicineslist';
 
 
 const {Sider,Footer } = Layout;
@@ -91,7 +92,7 @@ function Nav() {
                 <ProtectedRoutes exact path="/home/note-expedient-edit/:id" component={EditNoteEView} />
                 {/* Rutas de Medicianas */}
                 <ProtectedRoutes exact path="/home/medicine" component={MedicineView} />
-                
+                <ProtectedRoutes exact path= "/home/medicines" component={Medicineslist}/>
                 <Route path="/home/*" component={Error404} />
            </Case>
           <Footer style={{ textAlign: 'center' }}>Bonifacio Juarez Ceja ©</Footer>

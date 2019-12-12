@@ -27,7 +27,7 @@ function AddPacienteView (props){
                 })
             },
             onError(err){
-                console.error(err)
+                
                 Swal.fire({
                     title:"Error",
                     text:"Hubo un error al insertar el Paciente",

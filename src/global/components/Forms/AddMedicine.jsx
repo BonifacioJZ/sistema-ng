@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, } from 'antd';
+import { Form, Input, Button, InputNumber } from 'antd';
 
 
 class AddMedicine extends React.Component{
@@ -17,7 +17,29 @@ class AddMedicine extends React.Component{
         this.props.form.validateFieldsAndScroll((err,values)=>{
             if(!err){ 
               
-               console.log(values)
+               
+               let variables  = {
+                   nombre: values.name,
+                   formula:values.formule,
+                   descripcion:values.description,
+                   docis:values.docis,
+                   stock:values.stock,
+                   laboratorio:values.laboratorio
+                   
+
+               }
+               if (variables.stock===0){
+                   variables={
+                       ...variables,
+                       disponible:false
+                   }
+               }else{
+                   variables ={
+                       ...variables,
+                       disponible:true
+                   }
+               }
+               this.props.mutation({variables:{input:variables}})
             }
             else{
               
@@ -73,6 +95,24 @@ class AddMedicine extends React.Component{
                         placeholder="Docis"
                          onChange={this.onChange}
                          />)}
+                </Form.Item>
+                <Form.Item label="Cantidad Disponible" >
+                        {getFieldDecorator('stock',{
+                            initialValue:0,
+                            
+                        })(
+                            <InputNumber min={0} max={500} />
+                        )}
+                </Form.Item>
+                <Form.Item label="Laboratorio">
+                    {getFieldDecorator('laboratorio',{
+                        rules:[{
+                            required:true,
+                            message:"El Laboratorio es Requerido"
+                        }]
+                    })(<Input 
+                        placeholder="Laboratorio"
+                    />)}
                 </Form.Item>
                 <Form.Item >
                             <Button type="primary" htmlType="submit">

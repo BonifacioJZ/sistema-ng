@@ -72,7 +72,10 @@ class Query(ObjectType):
             return expediente.objects.filter(pacientes=id)
 
     def resolve_medicines(self,info,**kwargs):
-        return medicina.objects.all()
+       user = info.context.user
+       if user.is_anonymous:
+           raise Exception('Not logged in !')
+       return medicina.objects.all()
 
     def resolve_user(self,info,**kwargs):
         id = kwargs.get('id')
