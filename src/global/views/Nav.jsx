@@ -17,6 +17,8 @@ import NoteEView from './NoteEView';
 import EditNoteEView from './EditNoteEView';
 import MedicineView from './MedicineView';
 import Medicineslist from './Medicineslist';
+import UpdateMedicine from './UpdateMedicine';
+import MedicinView from './MedicinView';
 
 
 const {Sider,Footer } = Layout;
@@ -93,6 +95,9 @@ function Nav() {
                 {/* Rutas de Medicianas */}
                 <ProtectedRoutes exact path="/home/medicine" component={MedicineView} />
                 <ProtectedRoutes exact path= "/home/medicines" component={Medicineslist}/>
+                <ProtectedRoutes exact path="/home/medicines-update/:id" component={UpdateMedicine} />
+                <ProtectedRoutes exact path="/home/medidine-info/:id" component={MedicinView} />
+                
                 <Route path="/home/*" component={Error404} />
            </Case>
           <Footer style={{ textAlign: 'center' }}>Bonifacio Juarez Ceja ©</Footer>

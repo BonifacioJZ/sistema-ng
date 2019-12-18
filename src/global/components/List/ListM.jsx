@@ -1,14 +1,20 @@
 import React from 'react'
 import { url } from '../../variables/os';
 import reqwest from 'reqwest'
-import { List } from 'antd';
+import { List, Icon,Button } from 'antd';
 import IconText from '../simplecomponents/IconText';
+import Swal from 'sweetalert2'
 
 const token = localStorage.getItem('token')
 class ListM extends React.Component{
-    state ={
-        data:[],
-        loading:true
+    constructor(props){
+        super(props)
+        this.state ={
+            data:[],
+            loading:true
+        }
+        this.delete = this.delete.bind(this)
+
     }
     componentDidMount(){
         this.fetchData(res=>{
@@ -43,6 +49,22 @@ class ListM extends React.Component{
 
         })
     }
+    delete=(id)=>{
+        if(id){
+            Swal.fire({
+                title:"Estas Seguro de Eliminar el Expediente",
+                text: "Esta decicion no es Reversible",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#52c41a',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si eliminar'
+            }).then((result)=>{
+                result.value?this.props.mutation({variables:{id:id}}):console.log("No Funciona")
+            })
+        }
+
+    }
     render(){
         return(
            <div>
@@ -60,9 +82,9 @@ class ListM extends React.Component{
                        <List.Item
                             key={item.id}
                             actions={[
-                                <IconText type="edit" theme="twoTone"  color="#52c41a" />,
-                                <IconText type="file-add" color="#52c41a" theme="twoTone" />,
-                                <IconText type="profile" color="#52c41a"  theme="twoTone"  />
+                                <IconText direccion="/home/medicines-update" id={item.id}   type="edit" theme="twoTone"  color="#52c41a" />,
+                                <IconText direccion="/home/medidine-info" id={item.id} type="profile" color="#52c41a"  theme="twoTone"  />,
+                                <Button onClick={this.delete.bind(this,item.id)} ><Icon type="delete" theme="twoTone" twoToneColor="#ff4d4f" /></Button>
                             ]}>
                             <List.Item.Meta
                                 title={`${item.nombre.toUpperCase()}`}

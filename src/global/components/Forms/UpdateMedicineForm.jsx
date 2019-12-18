@@ -1,16 +1,58 @@
 import React from 'react';
 import { Form, Input, Button, InputNumber } from 'antd';
+import reqwest from 'reqwest'
+import { url } from '../../variables/os';
 
-
-class AddMedicine extends React.Component{
+const token = localStorage.getItem('token')
+class UpdateMedicineForm extends React.Component{
 
     state = {
         value: '',
+        id:this.props.id,
+        datos:[]
       };
     
       onChange = ({ target: { value } }) => {
         this.setState({ value });
       };
+
+      componentDidMount(){
+          this.fetchData(res=>{
+              
+              this.setState({
+                  datos:res.data.medicina
+              })
+              console.log(this.state)
+          })
+      }
+
+      fetchData= callback=>{
+        reqwest({
+            url,
+            method:'post',
+            type:"json",
+            data:{
+                query:`
+                query{
+                    medicina(id:${this.state.id}){
+                        nombre,
+                        formula,
+                        docis,
+                        descripcion,
+                        laboratorio,
+                        stock,  
+                      }
+                }`
+            },
+            headers:{
+                Authorization:`JWT ${token}`
+            },
+            success: res => {
+                callback(res);
+              },
+
+        })
+    }
 
     handlerSubmit = (e) => { 
         e.preventDefault(); 
@@ -39,7 +81,8 @@ class AddMedicine extends React.Component{
                        disponible:true
                    }
                }
-               this.props.mutation({variables:{input:variables}})
+               console.log(variables)
+               this.props.mutation({variables:{id:this.state.id,input:variables}})
             }
             else{
               
@@ -54,6 +97,7 @@ class AddMedicine extends React.Component{
            <Form onSubmit={this.handlerSubmit}>
                 <Form.Item label="Nombre">
                     {getFieldDecorator('name',{
+                        initialValue:this.state.datos.nombre,
                         rules:[
                             {
                                 required: true,
@@ -65,6 +109,7 @@ class AddMedicine extends React.Component{
                 </Form.Item>
                 <Form.Item label="Formula">
                     {getFieldDecorator('formule',{
+                        initialValue:this.state.datos.formula,
                         rules:[
                             {
                                 required:true,
@@ -77,7 +122,9 @@ class AddMedicine extends React.Component{
                 <Form.Item  label="Descripcion" >
                     {getFieldDecorator('description',{
                         setFieldsValue:value,
-                        rules:[{required:true,
+                        initialValue:this.state.datos.descripcion,
+                        rules:[{
+                            required:true,
                             message:"Se Requiere una Descripcion del medicamento"}]
 
                     })(<Input.TextArea 
@@ -87,6 +134,7 @@ class AddMedicine extends React.Component{
                 </Form.Item>
                 <Form.Item  label="Dosis" >
                     {getFieldDecorator('docis',{
+                        initialValue:this.state.datos.docis,
                         setFieldsValue:value,
                         rules:[{required:true,
                             message:"Se Requiere una la docis del medicamento"}]
@@ -98,7 +146,7 @@ class AddMedicine extends React.Component{
                 </Form.Item>
                 <Form.Item label="Cantidad Disponible" >
                         {getFieldDecorator('stock',{
-                            initialValue:0,
+                            initialValue:this.state.datos.stock,
                             
                         })(
                             <InputNumber min={0} max={500} />
@@ -106,6 +154,7 @@ class AddMedicine extends React.Component{
                 </Form.Item>
                 <Form.Item label="Laboratorio">
                     {getFieldDecorator('laboratorio',{
+                        initialValue:this.state.datos.laboratorio,
                         rules:[{
                             required:true,
                             message:"El Laboratorio es Requerido"
@@ -124,4 +173,4 @@ class AddMedicine extends React.Component{
     }
 }
 
-export default AddMedicine = Form.create({name:'register'})(AddMedicine);
+export default UpdateMedicineForm = Form.create({name:'update'})(UpdateMedicineForm);

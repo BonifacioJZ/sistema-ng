@@ -9,6 +9,56 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from .models import paciente, medicina, expediente,notesexpedient
 
+
+class DeleteMedicine(graphene.Mutation):
+    class Arguments:
+        id = graphene.Int()
+    ok = graphene.Boolean()
+    @staticmethod
+    def mutate(root,info,id):
+        user  = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not Logged in!')
+        else:
+            if id is not None:
+                medicina_instace = medicina.objects.get(pk=id)
+                if medicina_instace is not None:
+                    ok = True
+                    medicina_instace.delete()
+                    return DeleteMedicine(ok)
+                raise Exception('No Medicine')
+            raise Exception('No id')
+
+class UpdateMedicine(graphene.Mutation):
+    class Arguments:
+        id = graphene.Int(required=True)
+        input = MedicineInput(required=True)
+    ok = graphene.Boolean()
+    medicine = graphene.Field(MedicinaType)
+    @staticmethod
+    def mutate(root,info,id,input=None):
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not Logged in!')
+        else:
+            if input is not None:
+                if id is not None:
+                    medicina_instance = medicina.objects.get(pk=id)
+                    if medicina_instance is not None:
+                        ok = True
+                        medicina_instance.nombre = input.nombre
+                        medicina_instance.formula = input.formula
+                        medicina_instance.descripcion = input.descripcion
+                        medicina_instance.stock = input.stock
+                        medicina_instance.disponible = input.disponible
+                        medicina_instance.laboratorio = input.laboratorio
+                        medicina_instance.docis = input.docis
+                        medicina_instance.save()
+                        return UpdateMedicine(ok=ok,medicine = medicina_instance)
+                    raise Exception('No Medicine')
+                raise Exception('No id')
+            raise Exception('No data!')
+
 class DeleteExpedient(graphene.Mutation):
     class Arguments:
         id = graphene.Int(required=True)

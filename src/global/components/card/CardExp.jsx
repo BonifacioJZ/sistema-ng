@@ -240,7 +240,7 @@ class CardExp extends React.Component{
                                 description={item.formula}
                             />
                                 <Modal
-                                    title="Docis"
+                                    title="Dosis"
                                     visible={this.state.visible}
                                     onOk={this.handlerOk}
                                     onCancel={this.handlerCancel}>

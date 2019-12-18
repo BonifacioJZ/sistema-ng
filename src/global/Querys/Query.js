@@ -67,6 +67,15 @@ mutation CreateExpediente($input:ExpedientInput!){
   }
 }
 `;
+const UPDATE_MEDICINE = gql`
+mutation UpdateMedicine($id:Int!,$input:MedicineInput!){
+  updateMedicine(id:$id,input:$input){
+    ok,
+    medicine{
+      id
+    }
+  }
+}`
 const UPDATE_NOTE_EXPEDIENT= gql`
 mutation UpdateNoteExpedient($id:Int!,$input:NoteInput!){
   updateNoteExpedient(id:$id,input:$input){
@@ -76,6 +85,13 @@ mutation UpdateNoteExpedient($id:Int!,$input:NoteInput!){
     }
   }
 }`;
+//Delete
+const DELETE_MEDICINE=gql`
+mutation DeleteMedicine($id:Int!){
+  deleteMedicine(id:$id){
+    ok
+  }
+}`
 const DELETE_NOTE_EXPEDIENT=gql`
 mutation DeleteNoteExpedient($id:Int!){
   deleteNoteExpedient(id:$id){
@@ -140,10 +156,12 @@ export {
     UPDATE_EXPEDIENTE,
     UPDATE_NOTE_EXPEDIENT,
     ADD_MEDICINE,
+    UPDATE_MEDICINE,
     //Query
     ADD_PACIENTE,
     PACIENTES_DATA,
     //DeleteQuery's
     DELETE_NOTE_EXPEDIENT,
     DELETE_EXPEDIENT,
+    DELETE_MEDICINE,
 }

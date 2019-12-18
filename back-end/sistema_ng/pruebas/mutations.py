@@ -1,7 +1,8 @@
 import graphene
 from .queryM import (CreateUser,Login,CreatePaciente,CreateMedicine,
 CreateExpediente,UpdatePaciennte,CreateNote,UpdateExpedient,
-UpdateNoteExpedient,DeleteNoteExpedient, DeleteExpedient)
+UpdateNoteExpedient,DeleteNoteExpedient, DeleteExpedient,
+UpdateMedicine,DeleteMedicine)
 
 class Mutation(graphene.ObjectType):
     create_actor = CreateUser.Field()
@@ -15,3 +16,5 @@ class Mutation(graphene.ObjectType):
     update_note_expedient = UpdateNoteExpedient.Field()
     delete_note_expedient = DeleteNoteExpedient.Field()
     delete_expedient =  DeleteExpedient.Field()
+    update_medicine = UpdateMedicine.Field()
+    delete_medicine = DeleteMedicine.Field()
