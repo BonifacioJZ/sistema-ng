@@ -1,21 +1,51 @@
 import React from 'react'
 import { url } from '../../variables/os';
 import reqwest from 'reqwest'
-import { List, Icon,Button } from 'antd';
+import { List, Icon,Button, Modal,Row,Select,Input } from 'antd';
 import IconText from '../simplecomponents/IconText';
 import Swal from 'sweetalert2'
 
+const {Option} = Select
+const {Search} = Input
 const token = localStorage.getItem('token')
 class ListM extends React.Component{
     constructor(props){
         super(props)
         this.state ={
             data:[],
-            loading:true
+            loading:true,
+            visible:false,
+            valor:'nombre'
         }
         this.delete = this.delete.bind(this)
+        this.handleChange = this.handleChange.bind(this)
 
     }
+
+
+    showModal = ()=>{
+        this.setState({
+            visible:true
+        });
+    };
+
+    
+    handlerOk = e =>{
+        
+        this.setState({
+            visible:false
+        })
+    }
+  
+
+    handlerCancel= e =>{
+       
+        this.setState({
+                visible:false,
+               
+        });
+    };
+
     componentDidMount(){
         this.fetchData(res=>{
             this.setState({
@@ -65,6 +95,12 @@ class ListM extends React.Component{
         }
 
     }
+    handleChange(value) {
+        this.setState({
+            valor:value
+        })
+        console.log(this.state.valor)
+      }
     render(){
         return(
            <div>
@@ -78,6 +114,9 @@ class ListM extends React.Component{
                             },
                             pageSize: 5,
                         }}
+                    footer={
+                        <Button onClick={this.showModal} ><Icon type="search" />Buscar</Button>
+                    }
                    renderItem={item=>(
                        <List.Item
                             key={item.id}
@@ -96,6 +135,39 @@ class ListM extends React.Component{
                        </List.Item>
                    )}
                />
+               <Modal 
+               title="Buscaor"
+               visible={this.state.visible}
+               onOk = {this.handlerOk}
+               onCancel = {this.handlerCancel} >
+               <Row>
+                <Select defaultValue="nombre" style={{ width: 120 }} onChange={this.handleChange.bind(this)}>
+                            <Option value="nombre" > Nombre </Option>
+                            <Option value="formula">Formula</Option>
+                            <Option value="laboratorio">Laboratorio</Option>
+                        </Select>
+                    
+                </Row>
+                <br/>
+                <Row>
+                    <Search placeholder="Buscar" onSearch={value =>{
+                        this.setState({
+                            loading:true
+                        })
+
+                        this.props.query({variables:{busqueda:value,por:this.state.valor}})
+                        setTimeout(()=>{
+                            
+                            this.setState({
+                                loading:false,
+                                data:this.props.data.busquedam,
+                                visible:false
+                            })
+                        },500)
+                    }} enterButton />
+                </Row>
+
+               </Modal>
            </div>
         )
     }

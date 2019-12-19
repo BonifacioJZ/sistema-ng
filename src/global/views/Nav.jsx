@@ -28,7 +28,12 @@ const {SubMenu} = Menu;
 
 
 
-function Nav() {
+function Nav(props) {
+
+  var home = ()=>{
+   
+    props.history.push("/home")
+}
   
       return (
         <Layout className="layout" style={{ minHeight: '100vh' }} >
@@ -42,7 +47,7 @@ function Nav() {
           onCollapse={(collapse,type)=>{
             
           }}>
-            <div className="logo"/>
+            <div onClick={home} className="logo"/>
             <Menu
               theme="dark"
               mode="inline"

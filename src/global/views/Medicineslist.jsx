@@ -2,15 +2,17 @@ import React from 'react'
 import {Layout} from 'antd';
 import Head2 from './../components/Head2';
 import ListM from '../components/List/ListM';
-import { DELETE_MEDICINE } from '../Querys/Query';
+import { DELETE_MEDICINE, SEARCH_MEDICINE } from '../Querys/Query';
 import { useMutation } from '@apollo/react-hooks';
 import Swal from 'sweetalert2'
+import { useLazyQuery } from '@apollo/react-hooks';
 const {Header,Content} = Layout;
 const Medicineslist = (props)=>{
     var logout = ()=>{
         localStorage.clear()
         props.history.push("/")
     }
+    const [medicin,{data}] =useLazyQuery(SEARCH_MEDICINE) 
     const [delet] = useMutation(DELETE_MEDICINE,{
         onCompleted(){
             Swal.fire({
@@ -38,7 +40,7 @@ const Medicineslist = (props)=>{
             </Header>
             <Content style={{ margin: '24px 16px 0' }}>
                 <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                    <ListM mutation={delet}  />
+                    <ListM mutation={delet} query={medicin} data={data}/>
                 </div>
             </Content>
         </div>

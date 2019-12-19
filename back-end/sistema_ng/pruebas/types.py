@@ -49,7 +49,52 @@ class Query(ObjectType):
     medicina = graphene.Field(MedicinaType, id= graphene.ID())
     expedientp = graphene.List(ExpedientType,idpaciente= graphene.ID())
     noteexpedient = graphene.Field(NoteEType,id=graphene.ID())
+    busquedap = graphene.List(PacienteType,busqueda= graphene.String(),por=graphene.String())
+    busquedam = graphene.List(MedicinaType,busqueda=graphene.String(),por=graphene.String())
 
+    def resolve_busquedam(sef,info,**kwargs):
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not Logged in!')
+        else:
+            busqueda = kwargs.get('busqueda')
+            por = kwargs.get('por')
+            if por is None:
+                return medicina.objects.filter(nombre__icontains=busqueda)
+            if por =='nombre':
+                return medicina.objects.filter(nombre__icontains=busqueda)
+            if por =='formula':
+                return medicina.objects.filter(formula__icontains=busqueda)
+            if por =='laboratorio':
+                return medicina.objects.filter(laboratorio__icontains=busqueda) 
+           
+
+    def resolve_busquedap(self,info, **kwargs):
+        user = info.context.user
+        
+        if user.is_anonymous:
+            raise Exception('Not logged in!')
+        else:
+            busqueda = kwargs.get('busqueda')
+            por = kwargs.get('por')
+           
+           
+            if por is None:
+                return paciente.objects.filter(nombre__icontains=busqueda)
+            if por =='nombre':
+                return paciente.objects.filter(nombre__icontains=busqueda)
+            if  por == 'estado':
+                print('hola')
+                return paciente.objects.filter(estado__icontains=busqueda)
+            if por == 'ciudad':
+                return paciente.objects.filter(ciudad__icontains=busqueda)
+            if por == 'colonia':
+                return paciente.objects.filter(colonia__icontains=busqueda)
+            if por == 'apellido':
+                return paciente.objects.filter(apellido__icontains=busqueda)
+
+                
+        
     def resolve_noteexpedient(self,info,**kwargs):
         user = info.context.user
         id = kwargs.get('id')

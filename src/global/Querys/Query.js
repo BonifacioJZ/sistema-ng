@@ -114,6 +114,24 @@ mutation CreateMedicine($input:MedicineInput!){
   }
 }`
 //Query's Consultas
+const SEARCH_PATIENT = gql`
+query Busquedap($busqueda:String!,$por:String!){
+  busquedap(busqueda:$busqueda,por:$por){
+    id,
+    nombre,
+    apellidos,
+    edad,
+    birthday
+  }
+}`
+const SEARCH_MEDICINE =gql`
+query Busquedam($busqueda:String!,$por:String!){
+  busquedam(busqueda:$busqueda,por:$por){
+    nombre,
+    laboratorio,
+    formula
+  }
+}`
 //Consulta de los datos
 
 const PACIENTES_DATA = gql `
@@ -159,9 +177,12 @@ export {
     UPDATE_MEDICINE,
     //Query
     ADD_PACIENTE,
+    SEARCH_PATIENT,
     PACIENTES_DATA,
+    SEARCH_MEDICINE,
     //DeleteQuery's
     DELETE_NOTE_EXPEDIENT,
     DELETE_EXPEDIENT,
     DELETE_MEDICINE,
+    
 }

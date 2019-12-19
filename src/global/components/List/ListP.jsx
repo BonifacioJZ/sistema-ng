@@ -1,20 +1,36 @@
 import React from 'react';
-import {List,Button,Icon,Modal} from 'antd';
+import {List,Button,Icon,Modal, Select, Input, Row} from 'antd';
 import IconText from './../simplecomponents/IconText';
-import axios from 'axios';
 import {url} from './../../variables/os';
 import reqwest from 'reqwest'
+
+const {Option} = Select
+const { Search } = Input;
+
+
 const token = localStorage.getItem('token')
 class ListP extends React.Component{
     
-    state={
-        page:1,
-        loading:true,
-        total:0,
-        pages:0,
-        data:[],
-        visible:false
+    constructor(props){
+        super(props)
+        this.handleChange = this.handleChange.bind(this)
+        
+        this.state={
+            page:1,
+            loading:true,
+            total:0,
+            pages:0,
+            data:[],
+            visible:false,
+            busqueda:'',
+            valor:'nombre'
+        }
+    
     }
+
+
+   
+    
 
     showModal = ()=>{
         this.setState({
@@ -22,13 +38,35 @@ class ListP extends React.Component{
         });
     };
 
+    showModal2 = ()=>{
+        this.setState({
+            visible2:true
+        });
+    };
+
+
+    
+
+    handlerOk2 = e =>{
+        
+        this.setState({
+            visible2:false
+        })
+    }
     handlerOk = e =>{
         
         this.setState({
             visible:false
         })
     }
-    
+    handlerCancel2= e =>{
+       
+        this.setState({
+                visible2:false,
+               
+        });
+    };
+
     handlerCancel= e =>{
        
         this.setState({
@@ -45,19 +83,12 @@ class ListP extends React.Component{
             data:{
                 query:`
                 query{
-                    patients(page:${1}){
-                        page,
-                        pages,
-                        hasNext,
-                        hasPrev,
-                        total,
-                        objects{
-                            id,
-                            nombre,
-                            apellidos,
-                            edad,
-                            birthday
-                    }
+                    pacientes{
+                        id,
+                        nombre,
+                        apellidos,
+                        edad,
+                        birthday
                     }
                 }`
             },
@@ -74,15 +105,16 @@ class ListP extends React.Component{
     componentDidMount(){
        
       this.fetchData(res=>{
-          if(res.data.patients){
-            var regex = /(\d+)/g;
-            let json = res.data.patients
-            let total = json.total.match(regex)[0]
+          
+          if(res.data.pacientes){
+           
+            let json = res.data.pacientes
+           
             
             this.setState({
-                data:json.objects,
+                data:json,
                 loading:false,
-                total:parseInt(total)
+                
             })
 
           }else{
@@ -97,55 +129,15 @@ class ListP extends React.Component{
 
     }  
 
-    onChange=(page=1)=>{
+  
+     handleChange(value) {
         this.setState({
-            loading:true
+            valor:value
         })
+        console.log(this.state.valor)
+      }
 
-        const data =  axios({
-            url:"http://localhost:8000/graphql/",
-            method:"POST",
-            data:{
-                query:`
-                query{
-                    patients(page:${page}){
-                        page,
-                        pages,
-                        hasNext,
-                        hasPrev,
-                        objects{
-                            id,
-                            nombre,
-                            apellidos,
-                            edad,
-                            birthday
-                    }
-                    }
-                }`
-            },
-            headers:{
-                Authorization:`JWT ${token}`
-            }
-        })
-        
-        data.then(res=>{
-           
-            this.setState({
-                loading:false,
-                data:res.data.data.patients.objects
-            })
-        }).catch(error=>{
-            console.error(error)
-            this.setState({
-                loading:true,
-                data:[]
-            })
-        })
-
-    }
-
-   
-
+    
     render(){
     return(    
         <div>
@@ -155,14 +147,15 @@ class ListP extends React.Component{
                 dataSource={this.state.data}
                 pagination={{
                     onChange:page=>{
-                        this.onChange(page)
+                        
                     },
                     pageSize:10,
-                    total:this.state.total
+                   
                 }}
                 footer={
                     <div>
-                        <Button type="primary" style={{background:"#fadb14",color:"#000",borderColor:"#fadb14"}} onClick={this.showModal} ><Icon type="exclamation"/>Ayuda</Button>
+                        <Button type="primary" style={{background:"#fadb14",color:"#000",borderColor:"#fadb14"}} onClick={this.showModal} ><Icon type="exclamation"/>Ayuda</Button>,
+                        <Button onClick={this.showModal2}  type="ghost" ><Icon type="search" />Buscar</Button>
                     </div>
                 }
                 renderItem={item=>(
@@ -182,14 +175,48 @@ class ListP extends React.Component{
                     </List.Item>
                 )}
             />
+            <Modal
+                title="Buscar"
+                visible={this.state.visible2}
+                onCancel={this.handlerCancel2}
+                onOk={this.handlerOk2}>
+                <Row>
+                <Select defaultValue="nombre" style={{ width: 120 }} onChange={this.handleChange.bind(this)}>
+                            <Option value="nombre" > Nombre </Option>
+                            <Option value="curp">Curo</Option>
+                            <Option value="estado">Estado</Option>
+                            <Option value="colonia">Colonia</Option>
+                            <Option value="municipio" >Municipio</Option>
+                        </Select>
+                    
+                </Row>
+                <br/>
+                <Row>
+                    <Search placeholder="input search text" onSearch={value =>{
+                        this.setState({
+                            loading:true
+                        })
 
+                        this.props.query({variables:{busqueda:value,por:this.state.valor}})
+                        setTimeout(()=>{
+                            
+                            this.setState({
+                                loading:false,
+                                data:this.props.data.busquedap,
+                                visible2:false
+                            })
+                        },500)
+                    }} enterButton />
+                </Row>
+
+            </Modal>
             <Modal
             title="Ayuda"
             visible={this.state.visible}
             onOk={this.handlerOk}
             onCancel={this.handlerCancel}
             >
-
+                
             </Modal>
         </div>
     )
