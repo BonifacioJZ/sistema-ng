@@ -182,7 +182,7 @@ class CreateNote (graphene.Mutation):
                     titulo = input.titulo,
                     note = input.nota,
                     expedientes = expedient,
-                    hora = time.strftime("%H:%M:%S")
+                    hoara = time.strftime("%H:%M:%S")
                 )
                 note_in.save()
                 return CreateNote(ok ,note=note_in )

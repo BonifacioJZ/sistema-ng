@@ -192,7 +192,7 @@ class ListP extends React.Component{
                 </Row>
                 <br/>
                 <Row>
-                    <Search placeholder="input search text" onSearch={value =>{
+                    <Search placeholder="Buscar" onSearch={value =>{
                         this.setState({
                             loading:true
                         })

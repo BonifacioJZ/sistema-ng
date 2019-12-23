@@ -51,6 +51,15 @@ class Query(ObjectType):
     noteexpedient = graphene.Field(NoteEType,id=graphene.ID())
     busquedap = graphene.List(PacienteType,busqueda= graphene.String(),por=graphene.String())
     busquedam = graphene.List(MedicinaType,busqueda=graphene.String(),por=graphene.String())
+    expedients = graphene.List(ExpedientType)
+
+    def resolve_expedients(self,info,**kwargs):
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not Logged in!')
+        return expediente.objects.all()
+       
+
 
     def resolve_busquedam(sef,info,**kwargs):
         user = info.context.user

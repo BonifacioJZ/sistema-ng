@@ -19,6 +19,7 @@ import MedicineView from './MedicineView';
 import Medicineslist from './Medicineslist';
 import UpdateMedicine from './UpdateMedicine';
 import MedicinView from './MedicinView';
+import ViewEps from './ViewEps';
 
 
 const {Sider,Footer } = Layout;
@@ -89,6 +90,7 @@ function Nav(props) {
                 <ProtectedRoutes exact path="/home/update-paciente/:id" component={UpdatePacienteView} />
                 <ProtectedRoutes exact path="/home/info-paciente/:id" component={InfoPaciente} />
                 {/* Rutas Expedientes*/}
+                <ProtectedRoutes exact path="/home/expedients" component={ViewEps}/>
                 <ProtectedRoutes exact path="/home/expedient-paciente/:id" component={ExpedientePaciente} />
                 <ProtectedRoutes exact path="/home/info-expedient/:id" component={InfoExpediente} />
                 <ProtectedRoutes exact path="/home/edit-expedient/:id" component={EditExpedient} />

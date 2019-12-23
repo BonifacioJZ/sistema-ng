@@ -33,7 +33,7 @@ class Home extends Component {
                         <Option  img="/img/23.jpg" alt="Medicina" ruta="medicine" ruta2="medicines" title="Medicinas"/>
                     </Col>
                     <Col lg={{span:8}} md={{span:12}} xs={{span:24}}>
-                        <Option img="/img/checklist-3222079_1920.jpg" alt="Expedientes" title="Expedientes" />
+                        <Option img="/img/checklist-3222079_1920.jpg" ruta="expedients" alt="Expedientes" title="Expedientes" />
                     </Col>
                 </Row>
               </div>
