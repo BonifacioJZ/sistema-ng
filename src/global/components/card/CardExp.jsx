@@ -50,10 +50,12 @@ class CardExp extends React.Component{
     
 
     componentDidMount(){
+
         this.fetchData(res=>{
             
-            let nombre = `${res.data.expedient.pacientes.nombre} ${res.data.expedient.pacientes.apellidos}`;
             
+           let nombre =""
+            res.data.expedient.pacientes?  nombre = `${res.data.expedient.pacientes.nombre} ${res.data.expedient.pacientes.apellidos}` : nombre=""
            
             this.setState({
                 nombre,

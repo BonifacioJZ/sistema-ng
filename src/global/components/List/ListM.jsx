@@ -136,7 +136,7 @@ class ListM extends React.Component{
                    )}
                />
                <Modal 
-               title="Buscaor"
+               title="Buscador"
                visible={this.state.visible}
                onOk = {this.handlerOk}
                onCancel = {this.handlerCancel} >

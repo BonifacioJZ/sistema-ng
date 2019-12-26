@@ -12,6 +12,7 @@ function ListPaciente(props){
         props.history.push("/")
     }
     const [pacotient,{data}] = useLazyQuery(SEARCH_PATIENT)
+   
     return(
         <div>
             <Header className="header" style={{ background: '#fff', padding: 0 }}> 

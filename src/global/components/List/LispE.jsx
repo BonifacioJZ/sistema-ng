@@ -1,9 +1,11 @@
 import React from 'react'
 import { url } from '../../variables/os';
 import reqwest  from 'reqwest'
-import { List } from 'antd';
+import { List, Button, Icon, Modal, Row, Input } from 'antd';
 import IconText from '../simplecomponents/IconText';
 
+
+const {Search} = Input
 const token = localStorage.getItem('token')
 class LispE extends React.Component{
 
@@ -11,10 +13,34 @@ class LispE extends React.Component{
         super(props)
         this.state={
             datos:[],
-            loading:true
+            loading:true,
+            visible:false
         }
+        
     }
 
+    showModal = ()=>{
+        this.setState({
+            visible:true
+        });
+    };
+
+    
+    handlerOk = e =>{
+        
+        this.setState({
+            visible:false
+        })
+    }
+  
+
+    handlerCancel= e =>{
+       
+        this.setState({
+                visible:false,
+               
+        });
+    };
     componentDidMount(){
         this.fetchData(res=>{
             this.setState({
@@ -35,6 +61,10 @@ class LispE extends React.Component{
                         id,
                         hoara,
                         date,
+                         pacientes{
+                            nombre,
+                            apellidos
+                            }
                         
                       }
                 }`
@@ -53,6 +83,9 @@ class LispE extends React.Component{
         return(
             <div>
                 <List 
+                    footer={
+                        <Button onClick={this.showModal} > <Icon type="search" /> Buscar</Button>
+                    }
                     loading={this.state.loading}
                     dataSource={this.state.datos}
                     pagination={{
@@ -66,6 +99,7 @@ class LispE extends React.Component{
                         <div>
                             <List.Item
                                 key={item.id}
+                                
                                 actions={[
                                     <IconText  direccion="/home/info-expedient"  id={item.id} type="profile" color="#52c41a" theme="twoTone" />,
                                         <IconText direccion="/home/edit-expedient" id={item.id} type="edit" theme="twoTone"  color="#52c41a" />,
@@ -75,6 +109,31 @@ class LispE extends React.Component{
                                     title={item.date}
                                     />
                             </List.Item>
+                            <Modal
+                                title="Buscador"
+                                visible={this.state.visible}
+                                onOk = {this.handlerOk}
+                                onCancel = {this.handlerCancel} >
+                                <Row>
+                                <Search placeholder="Buscar" onSearch={value =>{
+                                    this.setState({
+                                        loading:true
+                                    })
+
+                                    this.props.query({variables:{por:value}})
+                                    
+                                    setTimeout(()=>{
+                                        
+                                        this.setState({
+                                            loading:false,
+                                            datos:this.props.data.busquedae[0].expedienteSet,
+                                            visible:false
+                                        })
+                                    },500)
+                                }} enterButton />
+                                </Row>
+
+                                </Modal>
                         </div>
                     )}
                 />

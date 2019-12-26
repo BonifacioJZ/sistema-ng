@@ -132,6 +132,16 @@ query Busquedam($busqueda:String!,$por:String!){
     formula
   }
 }`
+const SEARCH_EXPEDIENT = gql`
+query  Busquedae($por:String!){
+  busquedae(por:$por){
+    expedienteSet{
+      id,
+      hoara,
+      date,
+    }
+  }
+}`
 //Consulta de los datos
 
 const PACIENTES_DATA = gql `
@@ -180,6 +190,7 @@ export {
     SEARCH_PATIENT,
     PACIENTES_DATA,
     SEARCH_MEDICINE,
+    SEARCH_EXPEDIENT,
     //DeleteQuery's
     DELETE_NOTE_EXPEDIENT,
     DELETE_EXPEDIENT,

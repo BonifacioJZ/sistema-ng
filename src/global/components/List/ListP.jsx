@@ -176,7 +176,7 @@ class ListP extends React.Component{
                 )}
             />
             <Modal
-                title="Buscar"
+                title="Buscador"
                 visible={this.state.visible2}
                 onCancel={this.handlerCancel2}
                 onOk={this.handlerOk2}>
