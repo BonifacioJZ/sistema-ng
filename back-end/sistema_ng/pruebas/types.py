@@ -52,6 +52,14 @@ class Query(ObjectType):
     busquedap = graphene.List(PacienteType,busqueda= graphene.String(),por=graphene.String())
     busquedam = graphene.List(MedicinaType,busqueda=graphene.String(),por=graphene.String())
     expedients = graphene.List(ExpedientType)
+    busquedae = graphene.List(PacienteType,por=graphene.String())
+
+    def resolve_busquedae (self,info,**kwargs):
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not Logged In!')
+        por = kwargs.get('por')
+        return paciente.objects.filter(curp__icontains=por)
 
     def resolve_expedients(self,info,**kwargs):
         user = info.context.user
@@ -59,8 +67,6 @@ class Query(ObjectType):
             raise Exception('Not Logged in!')
         return expediente.objects.all()
        
-
-
     def resolve_busquedam(sef,info,**kwargs):
         user = info.context.user
         if user.is_anonymous:

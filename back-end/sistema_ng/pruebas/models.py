@@ -10,6 +10,10 @@ class medicina(models.Model):
     laboratorio = models.CharField(blank=True,null=True , max_length=20)
     docis = models.TextField(verbose_name=("Docis Recomendada"),blank=True,null=True)
 
+class emergencia ( models.Model):
+   nombre = models.CharField(max_length=100,blank=True,null=True)
+   apellidos = models.CharField(max_length=100,blank=True,null= True)
+   telefono = models.CharField(max_length=13,blank=True,null=True)
 
 class paciente (models.Model):
     nombre = models.CharField(max_length=100, blank=True, null=True)
@@ -21,6 +25,8 @@ class paciente (models.Model):
     estado = models.CharField(max_length=100,blank=True, null=True)
     ciudad = models.CharField(max_length=100,blank=True, null=True)
     colonia = models.CharField(max_length=100,blank=True, null=True)
+    encaso_de_emergencia = models.ManyToManyField(emergencia, verbose_name=("Emergencia"), blank=True,null=True)
+
 
 class expediente (models.Model):
     pulso = models.CharField(max_length=100,blank=True, null=True)
