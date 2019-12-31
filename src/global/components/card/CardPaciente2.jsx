@@ -4,6 +4,7 @@ import { Card, Descriptions, Row, Col, Button, Icon,List } from 'antd';
 import { url } from '../../variables/os'; 
 import IconText from '../simplecomponents/IconText';
 import Swal from 'sweetalert2'
+import ButtonGroup from 'antd/lib/button/button-group';
 
 
 
@@ -15,12 +16,16 @@ class CardPaciente2 extends React.Component{
     constructor(props){
         super(props);
         this.delete = this.delete.bind(this)
+        
         this.state={
             id:props.id,
             date:[],
             nombre:"",
             expedientes:[],
-            loading:true
+            loading:true,
+            familiar:false,
+            shownodal:false,
+            crear:this.props.crear
         }
     }
 
@@ -28,13 +33,19 @@ class CardPaciente2 extends React.Component{
         this.fetchData(res=>{
             let date = res.data.patient
             const nombre= `${date.nombre} ${date.apellidos}` 
+            let familiar = false
+            if(date.encasoDeEmergencia.length===0) familiar= false
+            else familiar= true
+             
             
             this.setState({
                 nombre:nombre.toUpperCase(),
                 date,
                 expedientes:date.expedienteSet,
-                loading:false
+                loading:false,
+                familiar
             })
+           
            
         })
         // 
@@ -62,7 +73,12 @@ class CardPaciente2 extends React.Component{
                         expedienteSet{
                             id,
                             date
-                        }
+                        },
+                        encasoDeEmergencia{
+                            nombre,
+                            apellidos,
+                            telefono
+                          }
 
                     }
                 }`
@@ -75,6 +91,15 @@ class CardPaciente2 extends React.Component{
               },
 
         })
+    }
+    showModal=()=>{
+        if(this.state.familiar){
+            this.setState({
+                showModal:true
+            })
+        }else{
+            window.history.pushState("")
+        }
     }
     delete=(id)=>{
         if(id){
@@ -97,6 +122,7 @@ class CardPaciente2 extends React.Component{
             <div>
                 <Card title={this.state.nombre}>
                     <Descriptions title="Informacion" >
+                        <Descriptions.Item label="Curp">{this.state.date.curp}</Descriptions.Item>
                         <Descriptions.Item label="Fecha de Nacimiento" span={3} >{this.state.date.birthday}</Descriptions.Item>
                         <Descriptions.Item label="Edad" span={3}>{this.state.date.edad}</Descriptions.Item>
                         <Descriptions.Item label="Telefono" span={3} >{this.state.date.telefono}</Descriptions.Item>
@@ -106,7 +132,10 @@ class CardPaciente2 extends React.Component{
                 <br/>
                     <Row justify="center" >
                         <Col offset={10} >
-                            <Button type="primary" onClick={this.props.function}><Icon type="plus" />Crear Expediente</Button>     
+                            <ButtonGroup>
+                                <Button type="primary" onClick={this.props.function}><Icon type="plus" />Crear Expediente</Button> 
+                                <Button type="primary" onClick={this.state.familiar===false?this.props.crear:this.showModal} >Familiar</Button>
+                            </ButtonGroup>    
                         </Col>
                     </Row>
                     <br/>

@@ -1,10 +1,18 @@
 import React ,{Component}from 'react';
 import {Form,Icon,Input,Button} from 'antd';
+import ButtonGroup from 'antd/lib/button/button-group';
 
 
  class Login extends Component{
 
+    
+
     render(){
+
+        
+        const administracion =()=>{
+            window.location ="http://localhost:8000/admin/"
+        }
        
         const  handleSubmit = (e) => { 
         e.preventDefault(); 
@@ -47,9 +55,14 @@ import {Form,Icon,Input,Button} from 'antd';
                     )}
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary" htmlType="submit" icon="login"  className="login-form-button">
-                        Log in
-                    </Button>
+                        <ButtonGroup>
+                            <Button type="primary" htmlType="submit" icon="login"  className="login-form-button">
+                                Inicio de Seccón 
+                            </Button>
+                            <Button onClick={administracion} type="ghost" className='login-form-button' >
+                                Administrador
+                            </Button>
+                        </ButtonGroup>
                 </Form.Item>
             </Form>
         )

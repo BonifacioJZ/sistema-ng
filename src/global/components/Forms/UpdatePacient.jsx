@@ -29,10 +29,11 @@ class UpdatePaciente extends Component{
                         telefono:value.phone,
                         estado:value.state,
                         ciudad:value.city,
-                        colonia:value.colonia
+                        colonia:value.colonia,
+                        curp:value.curp
 
                     }
-                    console.info(input)
+                    
                     this.props.mutation({variables:{id:this.state.id,input:input}})
                
                 }else{
@@ -48,7 +49,8 @@ class UpdatePaciente extends Component{
                         telefono:value.phone,
                         estado:value.state,
                         ciudad:value.city,
-                        colonia:value.colonia
+                        colonia:value.colonia,
+                        curp:value.curp
 
                     }
                     console.info(input)
@@ -89,7 +91,8 @@ class UpdatePaciente extends Component{
                         birthday,
                         ciudad,
                         colonia,
-                        estado
+                        estado,
+                        curp
 
 
                         }
@@ -172,6 +175,19 @@ class UpdatePaciente extends Component{
                         })(<Input 
                             placeholder="Apellidos"
                         />)}
+                        
+                </Form.Item>
+                <Form.Item label="Curp">
+                            {getFieldDecorator('curp',{
+                                initialValue:this.state.paciente.curp,
+                                rules:[
+                                    {
+                                        required:true,
+                                        message:'La Curp es Requerida'
+                                    }
+                                ]
+                            })(<Input placeholder="Curp" />)}
+
                 </Form.Item>
                 <Form.Item label="Fecha de nacimiento">
                             {getFieldDecorator('fecha',

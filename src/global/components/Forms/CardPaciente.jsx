@@ -31,7 +31,8 @@ class CardPaciente extends React.Component{
                         birthday,
                         ciudad,
                         colonia,
-                        estado
+                        estado,
+                        curp
 
 
                     }
@@ -56,6 +57,7 @@ class CardPaciente extends React.Component{
             <div>
                 <Card title={this.state.nombre}>
                     <Descriptions title="Informacion" >
+                        <Descriptions.Item label="Curp">{this.state.date.curp}</Descriptions.Item>
                         <Descriptions.Item label="Fecha de Nacimiento" span={3} >{this.state.date.birthday}</Descriptions.Item>
                         <Descriptions.Item label="Edad" span={3}>{this.state.date.edad}</Descriptions.Item>
                         <Descriptions.Item label="Telefono" span={3} >{this.state.date.telefono}</Descriptions.Item>

@@ -18,6 +18,7 @@ class PacienteInput(graphene.InputObjectType):
     estado = graphene.String()
     ciudad = graphene.String()
     colonia = graphene.String()
+    curp = graphene.String()
 
 class MedicineInput(graphene.InputObjectType):
     id = graphene.ID()

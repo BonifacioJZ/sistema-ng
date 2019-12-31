@@ -14,6 +14,9 @@ function InfoPaciente(props){
     var url = ()=>{
         props.history.push(`/home/expedient-paciente/${id}`)
     }
+    var crear=()=>{
+        props.history.push(`/home/create-familiar/${id}`)
+    }
     var logout = ()=>{
         localStorage.clear()
         props.history.push("/")
@@ -46,7 +49,7 @@ function InfoPaciente(props){
             </Header>
             <Content style={{ margin: '24px 16px 0' }} >
                 <div style={{ padding: 24, background: '#fff', minHeight: 360 }} >
-                    <CardPaciente2 id={id} mutation={dele} function={url} />
+                    <CardPaciente2 id={id} mutation={dele} crear={crear} function={url} />
                     
                 </div>
             </Content>

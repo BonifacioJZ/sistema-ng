@@ -25,7 +25,7 @@ class paciente (models.Model):
     estado = models.CharField(max_length=100,blank=True, null=True)
     ciudad = models.CharField(max_length=100,blank=True, null=True)
     colonia = models.CharField(max_length=100,blank=True, null=True)
-    encaso_de_emergencia = models.ManyToManyField(emergencia, verbose_name=("Emergencia"), blank=True,null=True)
+    encaso_de_emergencia = models.ManyToManyField(emergencia, verbose_name=("Emergencia"), blank=True)
 
 
 class expediente (models.Model):

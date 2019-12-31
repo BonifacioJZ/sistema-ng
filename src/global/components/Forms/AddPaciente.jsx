@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Form, Input,InputNumber,Button,Select,Icon,DatePicker} from 'antd';
+import {Form, Input,InputNumber,Button,Icon,DatePicker} from 'antd';
 import locale from 'antd/es/date-picker/locale/es_ES';
 class AddPaciente extends Component{
 
@@ -22,7 +22,8 @@ class AddPaciente extends Component{
                     telefono:value.phone,
                     estado:value.state,
                     ciudad:value.city,
-                    colonia:value.colonia
+                    colonia:value.colonia,
+                    curp:value.curp
 
                 }
                 this.props.mutation({variables:{input:input}})
@@ -64,14 +65,6 @@ class AddPaciente extends Component{
             rules: [{ type: 'object', required: true, message: 'Please select time!' }],
           };
        
-        const prefixSelector = getFieldDecorator('prefix',{
-            initialValue:'52',
-        })(
-            <Select style={{width:70}}>
-                <Select.Option value="52">+52</Select.Option>
-                <Select.Option value="1">+1</Select.Option>
-            </Select>
-        );
         return(
            <Form  layout="vertical" {...formItemLayout} onSubmit={this.handlerSubmit}>
                 <Form.Item label="Nombre">
@@ -99,6 +92,17 @@ class AddPaciente extends Component{
                             placeholder="Apellidos"
                         />)}
                 </Form.Item>
+                <Form.Item label="Curp">
+                            {getFieldDecorator('curp',{
+                                rules:[
+                                    {
+                                        required:true,
+                                        message:'La Curp es Requerida'
+                                    }
+                                ]
+                            })(<Input placeholder="Curp" />)}
+
+                </Form.Item>
                 <Form.Item label="Fecha de nacimiento">
                             {getFieldDecorator('date-picker',
                             config)(<DatePicker locale={locale}/>)}
@@ -120,8 +124,7 @@ class AddPaciente extends Component{
                                 
                             })(<Input 
                             prefix={<Icon type="phone" style={{color:'rgba(0,0,0,.25)'}}/>}
-                            placeholder="Telefono"
-                            addonBefore={prefixSelector} 
+                            placeholder="Telefono" 
                             style={{width:'100%'}} 
                             />)
                             }

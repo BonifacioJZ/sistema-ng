@@ -20,6 +20,7 @@ import Medicineslist from './Medicineslist';
 import UpdateMedicine from './UpdateMedicine';
 import MedicinView from './MedicinView';
 import ViewEps from './ViewEps';
+import Familiar from './Familiar';
 
 
 const {Sider,Footer } = Layout;
@@ -104,6 +105,9 @@ function Nav(props) {
                 <ProtectedRoutes exact path= "/home/medicines" component={Medicineslist}/>
                 <ProtectedRoutes exact path="/home/medicines-update/:id" component={UpdateMedicine} />
                 <ProtectedRoutes exact path="/home/medidine-info/:id" component={MedicinView} />
+
+                {/* Rutas de Familiar*/}
+                <ProtectedRoutes exact path ="/home/create-familiar/:id" component={Familiar} />
                 
                 <Route path="/home/*" component={Error404} />
            </Case>

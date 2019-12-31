@@ -298,6 +298,7 @@ class CreatePaciente(graphene.Mutation):
                 estado = input.estado,
                 ciudad = input.ciudad,
                 colonia = input.colonia,
+                curp = input.curp
                 )
             paciente_instance.save()
             return CreatePaciente(ok = ok, paciente_user=paciente_instance)
@@ -328,6 +329,7 @@ class UpdatePaciennte(graphene.Mutation):
                     patient_instance.estado = input.estado
                     patient_instance.ciudad = input.ciudad
                     patient_instance.colonia = input.colonia
+                    patient_instance.curp = input.curp
                     patient_instance.save()
                     return UpdatePaciennte(ok=ok,patient=patient_instance)
                 return UpdatePaciennte(ok=ok,patient=None)
