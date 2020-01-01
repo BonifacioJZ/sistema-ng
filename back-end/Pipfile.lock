@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "acd7e20f06cb812a08c5b543f921386a495ac02208a8de1136b017725a9f1301"
+            "sha256": "06a226159ee4971c94e5bf2c527fa1f38e9e877e56ff57b2c6b358b1763a63ca"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.6"
+            "python_version": "3.7"
         },
         "sources": [
             {
@@ -47,6 +47,14 @@
             "index": "pypi",
             "version": "==0.3.0"
         },
+        "django-material-admin": {
+            "hashes": [
+                "sha256:11984f75523d1cee3ffc24590190f60c43bf6ebb186040ebf5d8462f250d4b6c",
+                "sha256:d9e6ba1bf8d964308518672fc4c49450fe1e3bb12e96b0c6ed8137d671b50248"
+            ],
+            "index": "pypi",
+            "version": "==1.6.24"
+        },
         "graphene": {
             "hashes": [
                 "sha256:09165f03e1591b76bf57b133482db9be6dac72c74b0a628d3c93182af9c5a896",
@@ -56,11 +64,11 @@
         },
         "graphene-django": {
             "hashes": [
-                "sha256:233037a82a56d9d4a1357f51743a2948016a358a0b58d071faa2ae56bf47e65d",
-                "sha256:eab206e013eca3366b1a8f78ac9aa1024c7fbabed5cbd0c09fda6d325b37aa32"
+                "sha256:85376ed02941f579849033c027cd8b1e31be72765b504a08706ccb9234ecdc26",
+                "sha256:a290fc41a58ee61b43ff4b4885e866ef48bb8d66b0e7088fd8dc2bd677856e6a"
             ],
             "index": "pypi",
-            "version": "==2.7.1"
+            "version": "==2.8.0"
         },
         "graphql-core": {
             "hashes": [
@@ -86,10 +94,9 @@
         },
         "promise": {
             "hashes": [
-                "sha256:2ebbfc10b7abf6354403ed785fe4f04b9dfd421eb1a474ac8d187022228332af",
-                "sha256:348f5f6c3edd4fd47c9cd65aed03ac1b31136d375aa63871a57d3e444c85655c"
+                "sha256:dfd18337c523ba4b6a58801c164c1904a9d4d1b1747c7d5dbf45b693a49d93d0"
             ],
-            "version": "==2.2.1"
+            "version": "==2.3"
         },
         "pyjwt": {
             "hashes": [

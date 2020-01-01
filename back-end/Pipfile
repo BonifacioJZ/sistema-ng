@@ -11,6 +11,7 @@ graphene-django = "*"
 django-cors-headers = "*"
 django-graphql-jwt = "*"
 gunicorn = "*"
+django-material-admin = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.7"
