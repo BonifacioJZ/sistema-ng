@@ -54,6 +54,7 @@ function Nav(props) {
               theme="dark"
               mode="inline"
               defaultSelectedKeys={['1']}>
+              <Menu.Item><Link to="/home"> Home </Link></Menu.Item>
               <SubMenu
                 key="1"
                 title={
@@ -74,11 +75,19 @@ function Nav(props) {
                   </span>
                 }>
                 <Menu.Item>
-                 <Link to="/home/expedient-paciente">Crear Expediente</Link>
+                 <Link to="/home/expedients" >Listar Expedientes</Link>
                 </Menu.Item>
-                <Menu.Item>
-                  nav2
-                </Menu.Item>
+              </SubMenu>
+              <SubMenu
+                key="3"
+                title={
+                  <span>
+                    <Icon type="user"/>
+                    <span className="nav-text">Medicinas</span>
+                  </span>
+                }>
+                <Menu.Item><Link to="/home/add-paciente">Crear Medicinas</Link></Menu.Item>
+                <Menu.Item><Link to="/home/listpaciente" >Listar Medicinas</Link></Menu.Item>
               </SubMenu>
             </Menu>
          </Sider>

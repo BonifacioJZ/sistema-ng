@@ -5,29 +5,29 @@ import {useMutation} from '@apollo/react-hooks';
 import Auth from '../variables/auth';
 import  {USER_LOGIN} from '../Querys/Query';
 import Swal from 'sweetalert2';
+import { prefix } from '../variables/os';
 const {Header,Content,Footer} = Layout;
 
 
 
 function LoginView(props)  {
-
+  //Usando la Mutacion
   const [login]= useMutation(USER_LOGIN,{
     onCompleted(data){
       
-     
-        Auth.login(()=>{
+     //Esto se realizara si pasa la autentificacion
           localStorage.setItem('session',1)
           localStorage.setItem('token',data.tokenAuth.token)
-          props.history.push("/home")
+          window.location.href= `${prefix}home`
           
           
-        });
+       
     },
     onError(error){
-      Auth.logout(()=>{
-        
+      
+        //esto se ejecutara si falla la autentificacion
         localStorage.clear();
-      })
+      
       Swal.fire({
           title:"Error",
           icon:"error"

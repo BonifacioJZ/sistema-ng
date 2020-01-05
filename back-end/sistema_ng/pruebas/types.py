@@ -1,11 +1,15 @@
 import graphene
+from graphene_django.types import DjangoObjectType, ObjectType
+
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from graphene_django.types import DjangoObjectType, ObjectType
+
 from django.db.models import Count 
 
-from .models import expediente, medicina, paciente,notesexpedient,emergencia
+
 from .pagination import get_paginator
+
+from .models import expediente, medicina, paciente,notesexpedient,emergencia
 
 
 class UserType(DjangoObjectType):
@@ -147,10 +151,6 @@ class Query(ObjectType):
             return User.objects.get(pk=id)
         return None 
     def resolve_users(self,info,**kwargs):
-        user = info.context.user
-        print(user)
-        if user.is_anonymous:
-            raise Exception('Not logged in!')
         return User.objects.all()
 
     def resolve_pacientes (self,info,**kwargs):
@@ -168,21 +168,27 @@ class Query(ObjectType):
 
     def resolve_patient(self,info,**kwargs):
         id = kwargs.get('id')
-
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not logged in !')
         if id is not None:
             return paciente.objects.get(pk=id)
         return None        
 
     def resolve_expedient(self,info,**kwargs):
         id = kwargs.get('id')
-
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not logged in !')
         if id is not None:
             return expediente.objects.get(pk=id)
         return None
 
     def resolve_medicina(self,info,**kwargs):
         id = kwargs.get('id')
-        
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not logged in !')
         if id is not None:
             return medicina.objects.get(pk=id)
         return None
