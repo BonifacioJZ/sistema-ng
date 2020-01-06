@@ -98,6 +98,10 @@ class AddPaciente extends Component{
                                     {
                                         required:true,
                                         message:'La Curp es Requerida'
+                                    },
+                                    {
+                                        max:18,
+                                        message:"La Curp debe tener un Maximo de 18 Caracteres"
                                     }
                                 ]
                             })(<Input placeholder="Curp" />)}
@@ -121,7 +125,12 @@ class AddPaciente extends Component{
                 </Form.Item>
                 <Form.Item label="Numero de Telefono">
                             {getFieldDecorator('phone',{
-                                
+                                rules:[
+                                    {
+                                        max:14,
+                                        message:"El telefono no debe tener un Maximo de 14 Caracteres"
+                                    }
+                                ]
                             })(<Input 
                             prefix={<Icon type="phone" style={{color:'rgba(0,0,0,.25)'}}/>}
                             placeholder="Telefono" 

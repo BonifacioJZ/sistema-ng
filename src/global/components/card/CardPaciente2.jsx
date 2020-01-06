@@ -31,6 +31,7 @@ class CardPaciente2 extends React.Component{
 
     componentDidMount(){
         this.fetchData(res=>{
+            
             let date = res.data.patient
             const nombre= `${date.nombre} ${date.apellidos}` 
             let familiar = false
@@ -66,6 +67,7 @@ class CardPaciente2 extends React.Component{
                         apellidos,
                         edad,
                         telefono,
+                        curp,
                         birthday,
                         ciudad,
                         colonia,
@@ -134,7 +136,7 @@ class CardPaciente2 extends React.Component{
                         <Col offset={10} >
                             <ButtonGroup>
                                 <Button type="primary" onClick={this.props.function}><Icon type="plus" />Crear Expediente</Button> 
-                                <Button type="primary" onClick={this.state.familiar===false?this.props.crear:this.showModal} >Familiar</Button>
+                                
                             </ButtonGroup>    
                         </Col>
                     </Row>

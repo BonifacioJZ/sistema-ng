@@ -43,11 +43,13 @@ class LispE extends React.Component{
     };
     componentDidMount(){
         this.fetchData(res=>{
+            console.log(res)
             this.setState({
                 datos:res.data.expedients,
                 loading:false
             })
         })
+        
     }
     fetchData = cb=>{
         reqwest({
@@ -64,6 +66,7 @@ class LispE extends React.Component{
                          pacientes{
                             nombre,
                             apellidos
+                            curp,
                             }
                         
                       }
@@ -107,6 +110,7 @@ class LispE extends React.Component{
                                 ]}>
                                     <List.Item.Meta
                                     title={item.date}
+                                    description={`Fecha ${item.date}  Hora ${item.hoara}`}
                                     />
                             </List.Item>
                             <Modal
