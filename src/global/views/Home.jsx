@@ -25,16 +25,16 @@ class Home extends Component {
               <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                 <Row type="flex" gutter={16}>
                     <Col lg={{span:8}} md={{span:12}} xs={{span:24}}>
-                        <Option2 img="/img/hospital-840135__340.jpg" alt="Paciente" ruta="add-paciente" description={addPaciente} title="Paciente"/>
+                        <Option2 img="static/img/hospital-840135__340.jpg" alt="Paciente" ruta="add-paciente" description={addPaciente} title="Paciente"/>
                     </Col>
                     <Col lg={{span:8}} md={{span:12}} xs={{span:24}}>
-                        <Option2  img="/img/hospice-1821429_1920.jpg" ruta="listpaciente" alt="Pacientes" title="Pacientes" description={pacientes} />
+                        <Option2  img="static/img/hospice-1821429_1920.jpg" ruta="listpaciente" alt="Pacientes" title="Pacientes" description={pacientes} />
                     </Col>
                     <Col lg={{span:8}} md={{span:12}} xs={{span:24}}>
-                        <Option  img="/img/23.jpg" alt="Medicina" ruta="medicine" ruta2="medicines" title="Medicinas" description={medicina}  />
+                        <Option  img="static/img/23.jpg" alt="Medicina" ruta="medicine" ruta2="medicines" title="Medicinas" description={medicina}  />
                     </Col>
                     <Col lg={{span:8}} md={{span:12}} xs={{span:24}}>
-                        <Option img="/img/checklist-3222079_1920.jpg" ruta="expedients" alt="Expedientes" title="Expedientes" description={expdientes} />
+                        <Option img="static/img/checklist-3222079_1920.jpg" ruta="expedients" alt="Expedientes" title="Expedientes" description={expdientes} />
                     </Col>
                 </Row>
               </div>

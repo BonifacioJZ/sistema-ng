@@ -19,6 +19,7 @@ from django.urls import path
 from pruebas.shemas import schema
 from api.shemas import schema as api
 from django.views.decorators.csrf import csrf_exempt
+from pruebas.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql = True,schema=schema))),
@@ -26,4 +27,7 @@ urlpatterns = [
         graphiql=True,
         schema=api
     ))),
+    path("", index, name="index"),
+    path("",index, name="index"),
+    
 ]
