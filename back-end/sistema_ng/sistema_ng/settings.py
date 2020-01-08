@@ -24,12 +24,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'l((k5l*0li=kaz44(@967r)yd$y&bcit1jc*s)3kd6*3=_!v5m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '192.168.0.26',
     'localhost'
 ]
+
 CORS_ORIGIN_ALLOW_ALL=True
 CORS_ORIGIN_WHITELIST = [
    
@@ -155,4 +156,8 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'frontend', "build", "static"),  # update the STATICFILES_DIRS
+
+)
+STATIC_ROOT  =(
+    os.path.join(os.path.dirname(BASE_DIR),"static")
 )

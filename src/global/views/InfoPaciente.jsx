@@ -1,6 +1,6 @@
 import React from 'react';
 import {Layout} from 'antd';
-import {useParams} from 'react-router-dom'
+import {useParams, Redirect, Link} from 'react-router-dom'
 import Head2 from '../components/Head2';
 import CardPaciente2 from '../components/card/CardPaciente2';
 import { DELETE_EXPEDIENT } from '../Querys/Query';
@@ -17,6 +17,7 @@ function InfoPaciente(props){
     var crear=()=>{
         props.history.push(`/home/create-familiar/${id}`)
     }
+   
     var logout = ()=>{
         localStorage.clear()
         props.history.push("/")
@@ -30,14 +31,14 @@ function InfoPaciente(props){
                 
             }).then((result)=>{
                 if(result.value){
-                    window.location.reload()
+                    props.history.push(`/home/info-paciente/${id}`)
                 }
             })
         },
         onError(err){
             Swal.fire({
                 title:"Error",
-                text:"Hubo un error al Eliminar la nota",
+                text:"Hubo un error al eliminar el expediente",
                 icon:"error"
             })
         }

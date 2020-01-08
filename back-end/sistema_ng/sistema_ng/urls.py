@@ -13,13 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
 from graphene_django.views import GraphQLView
 from django.urls import path
+from django.conf.urls.static import static
 from pruebas.shemas import schema
+from django.conf.urls import handler404,handler400
 from api.shemas import schema as api
 from django.views.decorators.csrf import csrf_exempt
-from pruebas.views import index
+from pruebas.views import index,error
+
+handler404 = 'pruebas.views.error'
+handler400 = error
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql = True,schema=schema))),
@@ -29,5 +36,11 @@ urlpatterns = [
     ))),
     path("", index, name="index"),
     path("",index, name="index"),
+    path("home/", index),
+    path("home/add-paciente",index),
+    path("home/listpaciente",index),
+    path("home/update-paciente/",index),
+    path("home/medicine",index),
+
     
-]
+]+ static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

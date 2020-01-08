@@ -1,5 +1,6 @@
 import React from 'react';
 import {Result,Button,Layout} from 'antd';
+import {prefix} from './../variables/os'
 const {Content} =Layout
 
 
@@ -12,7 +13,7 @@ function Error404 (){
                         status="404"
                         title="404"
                         subTitle="La pagina que consulto no existe"
-                        extra={<Button  type="primary" onClick={()=>{ window.history.back()} } >Regresar</Button>}
+                        extra={<Button  type="primary" onClick={()=>{ window.location.href=`${prefix}`} } >Regresar</Button>}
                     />
                  </div>
             </Content>

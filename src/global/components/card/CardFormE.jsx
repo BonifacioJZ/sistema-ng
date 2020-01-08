@@ -5,7 +5,7 @@ import { CREAT_EXPEDIENTE } from '../../Querys/Query';
 import { useMutation } from '@apollo/react-hooks';
 import Swal from 'sweetalert2';
 
-function CardFormE ({id}){
+function CardFormE (props){
     const [expedient] = useMutation(CREAT_EXPEDIENTE,{
         onCompleted(date){
             Swal.fire(
@@ -14,7 +14,10 @@ function CardFormE ({id}){
                     icon:"success",
                     text:"Se Creo el Expediente con Exito"
                 }
-            )
+            ).then(()=>{
+                
+                
+            })
         },
         onError(err){
             console.error(err)
@@ -22,7 +25,7 @@ function CardFormE ({id}){
     })
     return(
         <Card title="Expediente">
-            <AddExpediente  id={id} mutation={expedient} />
+            <AddExpediente  id={props.id} mutation={expedient} />
         </Card>
     )
 }
