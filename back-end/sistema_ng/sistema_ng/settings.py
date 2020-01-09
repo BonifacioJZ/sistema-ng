@@ -24,11 +24,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'l((k5l*0li=kaz44(@967r)yd$y&bcit1jc*s)3kd6*3=_!v5m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG =  True
 
 ALLOWED_HOSTS = [
     '192.168.0.26',
-    'localhost'
+    'localhost',
+	'sistemang.info',
+	'www.sistemang.info'
 ]
 
 CORS_ORIGIN_ALLOW_ALL=True
@@ -110,11 +112,14 @@ WSGI_APPLICATION = 'sistema_ng.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'wwsist_sistemang',
+        'USER': 'wwsist_sistemang',
+        'PASSWORD': 'P0RK[LowGlo9',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

@@ -11,7 +11,7 @@ import ButtonGroup from 'antd/lib/button/button-group';
 
         
         const administracion =()=>{
-            window.location ="http://localhost:8000/admin/"
+            window.location ="http://sistemang.info/admin/"
         }
        
         const  handleSubmit = (e) => { 
